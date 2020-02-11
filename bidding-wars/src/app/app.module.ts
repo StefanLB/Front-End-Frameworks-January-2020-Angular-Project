@@ -4,19 +4,28 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { NavComponent } from './core/nav/nav.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore'; // Only required for database features
 import { AngularFireStorageModule } from '@angular/fire/storage'; // Only required for storage features
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { NotFoundComponent } from './not-found/not-found.component'; // Only required for auth features
+import { AngularFireAuthModule } from '@angular/fire/auth';       // Only required for auth features
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +36,9 @@ import { NotFoundComponent } from './not-found/not-found.component'; // Only req
     AngularFireAuthModule, // Only required for auth features,
     AngularFireStorageModule // Only required for storage features
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

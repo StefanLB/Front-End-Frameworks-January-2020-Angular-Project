@@ -1,1 +1,14 @@
 <p>login works!</p>
+<div class="authBlock">
+    <h3>Sign In</h3>
+    <div class="formGroup">
+      <input type="text" class="formControl" placeholder="Username" #email required>
+    </div>
+    <div class="formGroup">
+      <input type="password" class="formControl" placeholder="Password" #password required>
+    </div>
+    <!-- Calling SignIn Api from AuthenticationService -->
+    <div class="formGroup">
+      <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(email.value, password.value)">
+    </div>
+ </div>
