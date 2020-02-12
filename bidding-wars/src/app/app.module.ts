@@ -12,6 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore'; // Only required for database features
 import { AngularFireStorageModule } from '@angular/fire/storage'; // Only required for storage features
@@ -36,6 +37,7 @@ import { BidsModule } from './bids/bids.module';
     AngularFirestoreModule, // Only required for database features
     AngularFireAuthModule, // Only required for auth features,
     AngularFireStorageModule, // Only required for storage features
+    AngularFireDatabaseModule,  // Firebase database module
     BidsModule
   ],
   providers: [
