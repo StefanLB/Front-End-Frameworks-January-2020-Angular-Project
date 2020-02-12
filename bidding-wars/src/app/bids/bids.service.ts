@@ -27,13 +27,13 @@ export class BidsService {
 
   // Fetch Single Bid Object
   GetBid(id: string) {
-    this.bidRef = this.db.object('bids-list/' + id);
+    this.bidRef = this.db.object('all-bids/' + id);
     return this.bidRef;
   }
 
   // Fetch Bids List
   GetBidsList() {
-    this.bidsRef = this.db.list('bids-list');
+    this.bidsRef = this.db.list('all-bids');
     return this.bidsRef;
   }  
 
@@ -52,7 +52,7 @@ export class BidsService {
 
   // Delete Bid Object
   DeleteBid(id: string) { 
-    this.bidRef = this.db.object('bids-list/'+id);
+    this.bidRef = this.db.object('all-bids/'+id);
     this.bidRef.remove();
   }
 }

@@ -4,11 +4,13 @@ import { AllBidsComponent } from './all-bids/all-bids.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { AddBidComponent } from './add-bid/add-bid.component';
+import { EditBidComponent } from './edit-bid/edit-bid.component';
 
 
 
 @NgModule({
-  declarations: [AllBidsComponent],
+  declarations: [AllBidsComponent, AddBidComponent, EditBidComponent],
   imports: [
     CommonModule,
     MatTableModule,
