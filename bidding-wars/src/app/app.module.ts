@@ -17,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'; // Only requir
 import { AngularFireStorageModule } from '@angular/fire/storage'; // Only required for storage features
 import { AngularFireAuthModule } from '@angular/fire/auth';       // Only required for auth features
 import { AuthService } from './auth/auth.service';
+import { BidsModule } from './bids/bids.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { AuthService } from './auth/auth.service';
     LoginComponent,
     RegisterComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ import { AuthService } from './auth/auth.service';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'bidding-wars'),
     AngularFirestoreModule, // Only required for database features
     AngularFireAuthModule, // Only required for auth features,
-    AngularFireStorageModule // Only required for storage features
+    AngularFireStorageModule, // Only required for storage features
+    BidsModule
   ],
   providers: [
     AuthService
