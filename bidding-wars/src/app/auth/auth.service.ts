@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { User } from '../user/user';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -43,11 +41,9 @@ export class AuthService {
   }
 
   createUser(user) {
-    console.log(user);
     this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
       .then(userCredential => {
         this.userData = user;
-        console.log(userCredential);
 
         userCredential.user.updateProfile({
           displayName: user.userName,

@@ -2,7 +2,7 @@
   <div class="list-viewer-wrapper">
     <div class="list-header-title">Register</div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid" novalidate>
+    <form [formGroup]="registerForm" (ngSubmit)="createUser()">
       <div class="form-container">
         <mat-form-field>
           <input id="userName"

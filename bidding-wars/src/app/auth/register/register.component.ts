@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder
+    ) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  createUser(frm){
-    this.authService.createUser(frm.value);
+  createUser(){
+    this.authService.createUser(this.registerForm.value);
   }
 }
