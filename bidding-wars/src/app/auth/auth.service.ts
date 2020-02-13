@@ -85,4 +85,12 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     })
   }
+
+  getUserState(){
+    return this.afAuth.authState;
+  }
+
+  logout(){
+    return this.afAuth.auth.signOut();
+  }
 }

@@ -1,14 +1,15 @@
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/register-student">
-      <img class="brand-logo" src="../assets/logo.png">
-      <span class="dasboard-text">Dashboard</span>
-    </a>
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" routerLink="/register-student">
-          <span class="user-image" style="background-image: url('assets/user.jpg')"></span>
-          Hello Admin
-        </a>
-      </li>
-    </ul>
-  </nav>
+<mat-toolbar color="primary" class="fixed-top">
+  <mat-toolbar-row>
+    <img src="../assets/logo.png" routerLink="/">
+    <button mat-button routerLink="/">Bidding Wars</button>
+
+    <span class="spacer"></span>
+    <button mat-button routerLink="/">Home</button>
+    <button *ngIf="!user" mat-button routerLink="/login">Login</button>
+    <button *ngIf="!user" mat-button routerLink="/register">Register</button>
+    <button *ngIf="user" mat-button routerLink="/user/profile">Profile</button>
+    <button *ngIf="user" mat-button routerLink="/bids">Bids</button>
+    <button *ngIf="user" mat-button routerLink="/logout" (click)="logout()">Logout</button>
+
+  </mat-toolbar-row>
+</mat-toolbar>

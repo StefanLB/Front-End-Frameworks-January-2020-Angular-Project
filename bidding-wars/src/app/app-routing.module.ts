@@ -7,15 +7,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AllBidsComponent } from './bids/all-bids/all-bids.component';
 import { AddBidComponent } from './bids/add-bid/add-bid.component';
 import { EditBidComponent } from './bids/edit-bid/edit-bid.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
-  { path: 'app-login', component: LoginComponent /*canActivate: */},
-  { path: 'app-register', component: RegisterComponent, /*canActivate: [SecureInnerPagesGuard]*/ },
-  { path: 'all-bids', component: AllBidsComponent},
-  { path: 'add-bid', component: AddBidComponent },
-  { path: 'edit-bid/:id', component: EditBidComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', component: HomeComponent },
+  { path: 'login', component: LoginComponent /*canActivate: */},
+  { path: 'register', component: RegisterComponent, /*canActivate: [SecureInnerPagesGuard]*/ },
+  { path: 'bids', component: AllBidsComponent},
+  { path: 'bids/add', component: AddBidComponent },
+  { path: 'bid/:id', component: EditBidComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

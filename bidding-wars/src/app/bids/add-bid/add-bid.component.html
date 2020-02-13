@@ -1,1 +1,71 @@
-<p>add-bid works!</p>
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Add Bid</h1>
+</div>
+
+<form formGroup="bidsForm" (ngSubmit)="submitBidData()" novalidate>
+    <div class="row">
+        <div class="col-lg-5 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Bid Name</label>
+                    <input type="text" formControlName="name" class="form-control" required>
+                    <p *ngIf="name.touched && name.invalid" class="error"><sup>*</sup>Please enter bid name.</p>
+                    <p *ngIf="name.errors?.minlength" class="error"><sup>*</sup>Bid name shouldn't be less than 6
+                        symbols.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Description</label>
+                    <input type="text" formControlName="description" class="form-control" required>
+                    <p *ngIf="description.touched && description.invalid" class="error"><sup>*</sup>Please provide a
+                        description</p>
+                    <p *ngIf="description.errors?.minlength" class="error"><sup>*</sup>Description should be at least 30
+                        symbols.</p>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label>Created On</label>
+                    <input type="date" formControlName="createdOn" class="form-control" required>
+                    <p *ngIf="createdOn.touched && createdOn.invalid" class="error"><sup>*</sup>Please choose start
+                        date.</p>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label>Ends On</label>
+                    <input type="date" formControlName="endsOn" class="form-control" required>
+                    <p *ngIf="endsOn.touched && endsOn.invalid" class="error"><sup>*</sup>Please choose end date.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Highest Bid</label>
+                    <input type="number" formControlName="highestBid" class="form-control" required>
+                    <p *ngIf="highestBid.touched && highestBid.invalid" class="error"><sup>*</sup>Please provide a bid
+                    </p>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label>Image Url</label>
+                    <input type="text" formControlName="imageUrl" class="form-control" required>
+                    <p *ngIf="imageUrl.touched && imageUrl.invalid" class="error"><sup>*</sup>Please provide a ImageUrl.
+                    </p>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label>Seller</label>
+                    <input type="text" formControlName="seller" class="form-control" required>
+                    <p *ngIf="seller.touched && seller.invalid" class="error"><sup>*</sup>Please choose a seller.</p>
+                </div>
+            </div>
+
+            <div class="form-group text-right">
+                <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
+                <button type="submit" class="btn btn-success" [disabled]="!bidsForm.valid">Add Bid</button>
+            </div>
+
+        </div>
+    </div>
+</form>

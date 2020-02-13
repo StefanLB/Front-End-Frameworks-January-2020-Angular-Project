@@ -1,0 +1,30 @@
+img{
+    background-image: url("../../../assets/logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 64px;
+    height: 64px;
+}
+
+.navbar{
+    width: 100%;
+    background-color: #3c92b4;
+    ul{
+        li{
+            display: inline;
+            padding: 10px;
+            a{
+                color: black;
+                font-size: 22px;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+a {
+    color: black;
+    font-size: 32px;
+    text-decoration: none;
+}
