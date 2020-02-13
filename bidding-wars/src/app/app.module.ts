@@ -10,7 +10,9 @@ import { AuthService } from './auth/auth.service';
 import { BidsModule } from './bids/bids.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
-import { HomeModule } from './home/home.module'
+import { HomeModule } from './home/home.module';
+import { MaterialModule } from './material.module';
+
 
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
@@ -34,6 +36,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';       // Only requir
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'bidding-wars'),
     AngularFirestoreModule, // Only required for database features
     AngularFireAuthModule, // Only required for auth features,

@@ -1,14 +1,53 @@
-<p>register works!</p>
-<div class="authBlock">
-    <h3>Sign Up</h3>
-    <div class="formGroup">
-      <input type="text" class="formControl" placeholder="Username" #userEmail required>
-    </div>
-    <div class="formGroup">
-      <input type="password" class="formControl" placeholder="Password" #userPassword required>
-    </div>
-    <!-- Calling SignIn Api from AuthenticationService -->
-    <div class="formGroup">
-      <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPassword.value)">
-    </div>
- </div>
+<div class="medium-list" >
+  <div class="list-viewer-wrapper">
+    <div class="list-header-title">Register</div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid" novalidate>
+      <div class="form-container">
+        <mat-form-field>
+          <input id="userName"
+                 matInput
+                 formControlName="userName"
+                 placeholder="Enter username" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <input id="email"
+                   matInput
+                   formControlName="email"
+                   placeholder="Enter your email" />
+          </mat-form-field>
+
+        <mat-form-field>
+            <input id="password"
+                   matInput
+                   formControlName="password"
+                   placeholder="Enter your password"
+                   [type]="hide ? 'password':'text'" />
+              <mat-icon matSuffix (click)="hide = !hide">
+                {{hide ? 'visibility' : 'visibility_off'}}
+              </mat-icon>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input id="photoURL"
+                   matInput
+                   formControlName="photoURL"
+                   placeholder="Enter photo URL" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input id="phoneNumber"
+                   matInput
+                   formControlName="phoneNumber"
+                   placeholder="Enter your phone number" />
+          </mat-form-field>
+
+          <button mat-button type="submit" 
+                  class="mat-raised-button mat-primary" 
+                  [disabled]="!registerForm.valid">Register</button>
+          <button mat-button routerLink="/login" class="divider">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
