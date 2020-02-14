@@ -1,14 +1,33 @@
-<p>login works!</p>
-<div class="authBlock">
-    <h3>Sign In</h3>
-    <div class="formGroup">
-      <input type="text" class="formControl" placeholder="Username" #email required>
-    </div>
-    <div class="formGroup">
-      <input type="password" class="formControl" placeholder="Password" #password required>
-    </div>
-    <!-- Calling SignIn Api from AuthenticationService -->
-    <div class="formGroup">
-      <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(email.value, password.value)">
-    </div>
- </div>
+<div class="medium-list" >
+  <div class="list-viewer-wrapper">
+    <div class="list-header-title">Login</div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <div class="form-container">
+
+        <mat-form-field>
+            <input id="email"
+                   matInput
+                   formControlName="email"
+                   placeholder="Enter your email" />
+          </mat-form-field>
+
+        <mat-form-field>
+            <input id="password"
+                   matInput
+                   formControlName="password"
+                   placeholder="Enter your password"
+                   [type]="hide ? 'password':'text'" />
+              <mat-icon matSuffix (click)="hide = !hide">
+                {{hide ? 'visibility' : 'visibility_off'}}
+              </mat-icon>
+          </mat-form-field>
+
+          <button mat-button type="submit" 
+                  class="mat-raised-button mat-primary" 
+                  [disabled]="!loginForm.valid">Login</button>
+          <button mat-button routerLink="/login" class="divider">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
