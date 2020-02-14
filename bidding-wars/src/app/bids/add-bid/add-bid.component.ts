@@ -17,7 +17,7 @@ export class AddBidComponent implements OnInit {
 
 
   ngOnInit() {
-    this.crudApi.GetBidsList();  // Call GetStudentsList() before main form is being called
+    this.crudApi.getBidsList();  // Call GetStudentsList() before main form is being called
     this.bidForm();              // Call student form when component is ready
   }
 
@@ -66,7 +66,7 @@ export class AddBidComponent implements OnInit {
   }
 
   submitBidData() {
-    this.crudApi.AddBid(this.bidsForm.value); // Submit student data using CRUD API
+    this.crudApi.addBid(this.bidsForm.value); // Submit student data using CRUD API
     this.ResetForm();  // Reset form when clicked on reset button
   };
 }
