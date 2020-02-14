@@ -1,5 +1,25 @@
 <app-nav></app-nav>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+    <!-- Sidenav -->
+    <mat-sidenav #sidenav [mode]="'side'" [opened]="'true'" [fixedInViewport]="true"
+        [fixedTopGap]>
+        <mat-nav-list>
+            <a mat-list-item routerLinkActive="active" routerLink="/add-book">
+                <mat-icon>add</mat-icon>
+                <h4 mat-line *ngIf="isExpanded">Add Bid</h4>
+            </a>
+            <a mat-list-item routerLinkActive="active" routerLink="/books-list">
+                <mat-icon>format_list_bulleted</mat-icon>
+                <h4 mat-line *ngIf="isExpanded">All Bids</h4>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Main content -->
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 
 <app-footer></app-footer>

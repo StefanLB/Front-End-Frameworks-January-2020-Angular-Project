@@ -8,7 +8,6 @@
     <button *ngIf="!user" mat-button routerLink="/login">Login</button>
     <button *ngIf="!user" mat-button routerLink="/register">Register</button>
     <button *ngIf="user" mat-button routerLink="/user/profile">Profile</button>
-    <button *ngIf="user" mat-button routerLink="/bids">Bids</button>
     <button *ngIf="user" mat-button routerLink="/logout" (click)="logout()">Logout</button>
 
   </mat-toolbar-row>

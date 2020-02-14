@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -27,10 +28,18 @@ export class AuthService {
       })
   }
 
-  // Sign in with Google
-  // GoogleAuth() {
-  //   return this.AuthLogin(new auth.GoogleAuthProvider());
-  // }
+  googleAuth() {
+    return this.authLogin(new auth.GoogleAuthProvider());
+  }
+
+  authLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((result) => {
+        this.router.navigate(['/']);
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
 
   logout() {
     return this.afAuth.auth.signOut();

@@ -26,7 +26,10 @@
           <button mat-button type="submit" 
                   class="mat-raised-button mat-primary" 
                   [disabled]="!loginForm.valid">Login</button>
-          <button mat-button routerLink="/login" class="divider">Register</button>
+          <button mat-button routerLink="/register" class="divider">Register</button>
+          <button mat-button type="button" (click)="authService.googleAuth()" class="divider">
+            <i class="fab fa-google pr-4"></i>Log in with Google
+          </button>
       </div>
     </form>
   </div>
