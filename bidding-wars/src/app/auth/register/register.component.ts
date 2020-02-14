@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { User } from '../../user/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -10,7 +9,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  user: User = new User();
   registerForm: FormGroup;
   hide = true;
 
@@ -21,22 +19,22 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      'userName': [this.user.userName, [
+      'userName': ['', [
         Validators.required
       ]],
-      'email': [this.user.email, [
+      'email': ['', [
         Validators.required,
         Validators.email
       ]],
-      'password': [this.user.password, [
+      'password': ['', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(30)
       ]],
-      'photoURL': [this.user.photoURL, [
+      'photoURL': ['', [
         Validators.required
       ]],
-      'phoneNumber': [this.user.phoneNumber, [
+      'phoneNumber': [null, [
         Validators.required
       ]],
     });
