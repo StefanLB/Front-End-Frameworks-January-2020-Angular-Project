@@ -9,49 +9,44 @@ export class BidsService {
   bidsRef: AngularFireList<any>;
   bidRef: AngularFireObject<any>;
 
-
   constructor(private db: AngularFireDatabase) { }
 
   // Create Bid
-  AddBid(bid: Bid) {
+  addBid(bid: Bid) {
     this.bidsRef.push({
       name: bid.name,
       description: bid.description,
       createdOn: bid.createdOn,
       endsOn: bid.endsOn,
-      highestBid: 0,
       imageUrl: bid.imageUrl,
-      seller: bid.seller
+      seller: bid.seller,
+      highestBid: 0,
+      highestBidder: ''
     })
   }
 
   // Fetch Single Bid Object
-  GetBid(id: string) {
+  getBid(id: string) {
     this.bidRef = this.db.object('all-bids/' + id);
     return this.bidRef;
   }
 
   // Fetch Bids List
-  GetBidsList() {
+  getBidsList() {
     this.bidsRef = this.db.list('all-bids');
     return this.bidsRef;
   }  
 
   // Update Bid Object
-  UpdateBid(bid: Bid) {
-    this.bidRef.update({
-      name: bid.name,
-      description: bid.description,
-      createdOn: bid.createdOn,
-      endsOn: bid.endsOn,
+  updateBid(bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
+    this.bidRef.update({ //*** NOTE2: THE UPDATE BID SHOULD ALSO BE USED FOR WHEN SOMEONE BIDS ON AN OFFER ***/
       highestBid: bid.highestBid,
-      imageUrl: bid.imageUrl,
-      seller: bid.seller
+      highestBidder: bid.highestBidder
     })
   }  
 
   // Delete Bid Object
-  DeleteBid(id: string) { 
+  deleteBid(id: string) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO DELETE BIDS IF NO ONE HAS YET MADE AN OFFER ***/
     this.bidRef = this.db.object('all-bids/'+id);
     this.bidRef.remove();
   }
