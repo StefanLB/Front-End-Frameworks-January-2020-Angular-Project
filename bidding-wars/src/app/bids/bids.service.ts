@@ -38,16 +38,29 @@ export class BidsService {
   }  
 
   // Update Bid Object
-  updateBid(bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
+  updateBid(id, bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
     this.bidRef.update({ //*** NOTE2: THE UPDATE BID SHOULD ALSO BE USED FOR WHEN SOMEONE BIDS ON AN OFFER ***/
       highestBid: bid.highestBid,
       highestBidder: bid.highestBidder
     })
   }  
 
-  // Delete Bid Object
+  // Update New Bid Object
+  updateNewBid(id, bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
+    this.bidRef.update({ //*** NOTE2: THE UPDATE BID SHOULD ALSO BE USED FOR WHEN SOMEONE BIDS ON AN OFFER ***/
+      name: bid.name,
+      description: bid.description,
+      endsOn: bid.endsOn,
+      imageUrl: bid.imageUrl
+    })
+  } 
+
+  // Delete New Bid Object
   deleteBid(id: string) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO DELETE BIDS IF NO ONE HAS YET MADE AN OFFER ***/
     this.bidRef = this.db.object('all-bids/'+id);
-    this.bidRef.remove();
+    this.bidRef.remove()
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

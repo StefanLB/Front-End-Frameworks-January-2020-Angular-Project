@@ -8,11 +8,11 @@ import { RegisterComponent } from './auth/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './auth/auth.service';
 import { BidsModule } from './bids/bids.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material.module';
-
+import { BidsService } from './bids/bids.service';
 
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
@@ -38,16 +38,18 @@ import { AngularFireAuthModule } from '@angular/fire/auth';       // Only requir
     BrowserAnimationsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'bidding-wars'),
-    AngularFirestoreModule, // Only required for database features
-    AngularFireAuthModule, // Only required for auth features,
-    AngularFireStorageModule, // Only required for storage features
-    AngularFireDatabaseModule,  // Firebase database module
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     BidsModule,
     HomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    BidsService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

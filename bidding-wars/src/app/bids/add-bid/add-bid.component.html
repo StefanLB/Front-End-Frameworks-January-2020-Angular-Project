@@ -1,71 +1,80 @@
-<div class="pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Add Bid</h1>
-</div>
-
-<form formGroup="bidsForm" (ngSubmit)="submitBidData()" novalidate>
-    <div class="row">
-        <div class="col-lg-5 col-md-12 col-sm-12">
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label>Bid Name</label>
-                    <input type="text" formControlName="name" class="form-control" required>
-                    <p *ngIf="name.touched && name.invalid" class="error"><sup>*</sup>Please enter bid name.</p>
-                    <p *ngIf="name.errors?.minlength" class="error"><sup>*</sup>Bid name shouldn't be less than 6
-                        symbols.</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label>Description</label>
-                    <input type="text" formControlName="description" class="form-control" required>
-                    <p *ngIf="description.touched && description.invalid" class="error"><sup>*</sup>Please provide a
-                        description</p>
-                    <p *ngIf="description.errors?.minlength" class="error"><sup>*</sup>Description should be at least 30
-                        symbols.</p>
-                </div>
-
-                <div class="col-md-12 mb-3">
-                    <label>Created On</label>
-                    <input type="date" formControlName="createdOn" class="form-control" required>
-                    <p *ngIf="createdOn.touched && createdOn.invalid" class="error"><sup>*</sup>Please choose start
-                        date.</p>
-                </div>
-
-                <div class="col-md-12 mb-3">
-                    <label>Ends On</label>
-                    <input type="date" formControlName="endsOn" class="form-control" required>
-                    <p *ngIf="endsOn.touched && endsOn.invalid" class="error"><sup>*</sup>Please choose end date.</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label>Highest Bid</label>
-                    <input type="number" formControlName="highestBid" class="form-control" required>
-                    <p *ngIf="highestBid.touched && highestBid.invalid" class="error"><sup>*</sup>Please provide a bid
-                    </p>
-                </div>
-
-                <div class="col-md-12 mb-3">
-                    <label>Image Url</label>
-                    <input type="text" formControlName="imageUrl" class="form-control" required>
-                    <p *ngIf="imageUrl.touched && imageUrl.invalid" class="error"><sup>*</sup>Please provide a ImageUrl.
-                    </p>
-                </div>
-
-                <div class="col-md-12 mb-3">
-                    <label>Seller</label>
-                    <input type="text" formControlName="seller" class="form-control" required>
-                    <p *ngIf="seller.touched && seller.invalid" class="error"><sup>*</sup>Please choose a seller.</p>
-                </div>
-            </div>
-
-            <div class="form-group text-right">
-                <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
-                <button type="submit" class="btn btn-success" [disabled]="!bidsForm.valid">Add Bid</button>
-            </div>
-
+<!-- Title group  -->
+<div class="title-group">
+    <h1 class="mat-h1">Add Book</h1>
+    <mat-divider fxFlex="1 0"></mat-divider>
+  </div>
+ 
+  <!-- Book form -->
+  <div class="inner-wrapper">
+    <form [formGroup]="bidsForm" (ngSubmit)="submitBidData()" #resetForm="ngForm" novalidate>
+      <!-- Left block -->
+      <mat-card>
+        <div class="controlers-wrapper">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Book name" formControlName="book_name">
+            <mat-error *ngIf="handleError('book_name', 'required')">
+              You must provide a<strong>book name</strong>
+            </mat-error>
+          </mat-form-field>
+ 
+          <!-- ISBN -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ISBN-10" formControlName="isbn_10" pattern="[0-9]*" minlength="10"
+              maxlength="10">
+            <mat-error *ngIf="handleError('isbn_10', 'required')">
+              You must provide a <strong>10 digit ISBN</strong>
+            </mat-error>
+            <mat-error *ngIf="handleError('isbn_10', 'pattern')">
+              Only numbers are allowed
+            </mat-error>
+            <mat-error *ngIf="handleError('isbn_10', 'minlength')">
+              Your <strong>ISBN</strong> must be 10 digit
+            </mat-error>
+          </mat-form-field>
+ 
+          <!-- Author name -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Author name" formControlName="author_name">
+            <mat-error *ngIf="handleError('author_name', 'required')">
+              You must provide an <strong>author name</strong>
+            </mat-error>
+          </mat-form-field>
+ 
+          <!-- Publication date -->
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" placeholder="Publication date"
+              formControlName="publication_date" (dateChange)="formatDate($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="handleError('publication_date', 'required')">
+              Publication date is required
+            </mat-error>
+          </mat-form-field>
         </div>
-    </div>
-</form>
+      </mat-card>
+ 
+      <!-- Right block -->
+      <mat-card>
+        <div class="controlers-wrapper"> 
+          <!-- Book stock -->
+          <div class="misc-bottom-padding">
+            <mat-label>Available in stock: </mat-label>
+            <mat-radio-group aria-label="Select an option" formControlName="in_stock">
+              <mat-radio-button value="Yes">Yes</mat-radio-button>
+              <mat-radio-button value="No">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </mat-card>
+ 
+      <!-- Submit & Reset -->
+      <mat-card>
+        <div class="full-wrapper button-wrapper">
+          <div class="button-wrapper">
+            <button mat-flat-button color="warn">Submit</button>
+            <button mat-flat-button color="war" (click)="resetForm()">Clear</button>
+          </div>
+        </div>
+      </mat-card>
+    </form>
+  </div>
