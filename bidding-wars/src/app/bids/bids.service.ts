@@ -20,8 +20,10 @@ export class BidsService {
       endsOn: bid.endsOn,
       imageUrl: bid.imageUrl,
       seller: bid.seller,
-      highestBid: 0,
-      highestBidder: ''
+      sellerEmail: bid.sellerEmail,
+      highestBid: bid.highestBid,
+      highestBidder: bid.highestBidder,
+      highestBidderEmail: bid.highestBidderEmail
     })
   }
 

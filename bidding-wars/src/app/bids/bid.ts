@@ -6,6 +6,8 @@ export interface Bid {
     endsOn?: Date;
     imageUrl?: string;
     seller?: string;
+    sellerEmail?: string;
     highestBid?: number;
     highestBidder?: string;
+    highestBidderEmail?: string;
 }

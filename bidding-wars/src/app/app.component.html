@@ -5,11 +5,11 @@
     <mat-sidenav #sidenav [mode]="'side'" [opened]="'true'" [fixedInViewport]="true"
         [fixedTopGap]>
         <mat-nav-list>
-            <a mat-list-item routerLinkActive="active" routerLink="/add-book">
+            <a mat-list-item routerLinkActive="active" routerLink="/bids/add">
                 <mat-icon>add</mat-icon>
                 <h4 mat-line *ngIf="isExpanded">Add Bid</h4>
             </a>
-            <a mat-list-item routerLinkActive="active" routerLink="/books-list">
+            <a mat-list-item routerLinkActive="active" routerLink="/bids">
                 <mat-icon>format_list_bulleted</mat-icon>
                 <h4 mat-line *ngIf="isExpanded">All Bids</h4>
             </a>

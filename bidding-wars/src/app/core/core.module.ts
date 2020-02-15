@@ -9,7 +9,9 @@ import { MaterialModule } from '../material.module';
 
 
 @NgModule({
-  declarations: [NavComponent, FooterComponent],
+  declarations: [
+    NavComponent, 
+    FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
