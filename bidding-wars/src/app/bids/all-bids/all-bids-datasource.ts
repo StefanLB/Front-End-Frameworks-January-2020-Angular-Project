@@ -63,7 +63,6 @@ export class AllBidsDataSource extends DataSource<Bid> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
         case 'createdOn': return compare(a.createdOn, b.createdOn, isAsc);
         case 'endsOn': return compare(a.endsOn, b.endsOn, isAsc);
         case 'imageUrl': return compare(a.imageUrl, b.imageUrl, isAsc);

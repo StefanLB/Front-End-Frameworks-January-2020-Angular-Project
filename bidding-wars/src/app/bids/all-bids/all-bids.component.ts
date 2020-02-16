@@ -18,7 +18,6 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
   dataSource: AllBidsDataSource;
 
   displayedColumns = [
-  'id',
   'name',
   'createdOn',
   'endsOn',

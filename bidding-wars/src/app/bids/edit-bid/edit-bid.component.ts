@@ -17,6 +17,10 @@ export class EditBidComponent implements OnInit {
   editBidForm: FormGroup;
 
   ngOnInit() {
+    this.auth.getUserState()
+    .subscribe(user => {
+     this.user = user;
+    });
     this.updateBidForm();
   }
 
@@ -30,15 +34,24 @@ export class EditBidComponent implements OnInit {
   ) { 
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.bidApi.getBid(id).valueChanges().subscribe(data => {
-      this.editBidForm.setValue(data);
+      this.populateEditBidForm(data);
     })
+  }
+
+  populateEditBidForm(data){
+    this.editBidForm.patchValue({
+      name: data.name,
+      description: data.description,
+      endsOn: data.endsOn,
+      highestBid: +data.highestBid,
+      imageUrl: data.imageUrl
+    });
   }
 
   updateBidForm(){
     this.editBidForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
-      createdOn: [new Date().toISOString().substring(0, 10)],
       endsOn: ['', [Validators.required]],
       highestBid: [[null], [Validators.required]],
       highestBidder: [''],
@@ -64,7 +77,6 @@ export class EditBidComponent implements OnInit {
     this.location.back();
   }
 
-  /* Submit book */
   updateBid() {
     this.editBidForm.get('seller').setValue(this.user.displayName);
     this.editBidForm.get('sellerEmail').setValue(this.user.email);
@@ -74,7 +86,7 @@ export class EditBidComponent implements OnInit {
     var id = this.actRoute.snapshot.paramMap.get('id');
     if(window.confirm('Are you sure you want to update this bid?')){
         this.bidApi.updateNewBid(id, this.editBidForm.value);
-      this.router.navigate(['bids/all']);
+      this.router.navigate(['bids']);
     }
   }
 }
