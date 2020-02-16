@@ -10,6 +10,7 @@ import { DeleteBidComponent } from './delete-bid/delete-bid.component';
 import { ViewBidComponent } from './view-bid/view-bid.component';
 import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

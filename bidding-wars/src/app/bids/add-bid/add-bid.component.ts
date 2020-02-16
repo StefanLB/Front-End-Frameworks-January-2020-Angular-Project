@@ -14,7 +14,7 @@ export class AddBidComponent implements OnInit {
 
   @ViewChild('resetBidForm', {static: false}) myNgForm;
 
-  bidsForm: FormGroup;  // Define FormGroup to bid's form
+  bidsForm: FormGroup;
 
   constructor(
     private auth: AuthService,
@@ -72,7 +72,6 @@ export class AddBidComponent implements OnInit {
     this.bidsForm.get('highestBidder').setValue(this.user.displayName);
     this.bidsForm.get('highestBidderEmail').setValue(this.user.email);
 
-    console.log(this.bidsForm.value);
     if (this.bidsForm.valid){
     this.bidApi.addBid(this.bidsForm.value);
     this.resetForm();
