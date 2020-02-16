@@ -1,1 +1,47 @@
-<p>view-bid works!</p>
+<div class="title-group">
+    <h1 class="mat-h1">Bid Details</h1>
+    <mat-divider fxFlex="1 0"></mat-divider>
+</div>
+
+<div class="inner-wrapper">
+    <form [formGroup]="editBidForm" (ngSubmit)="updateBid()" novalidate>
+        <mat-card>
+            <div class="controlers-wrapper">
+                <mat-form-field class="example-full-width">
+                    <input readonly matInput placeholder="Bid name" formControlName="name">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <textarea readonly matInput placeholder="Description" formControlName="description"></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input readonly matInput placeholder="Ends On" formControlName="endsOn">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput type="number" placeholder="Your Bid" formControlName="highestBid" min={{currentHighestBid}}>
+                    <span matPrefix>$&nbsp;</span>
+                    <mat-error *ngIf="handleError('highestBid', 'min')">
+                        Your bid should be higher than the current highest bid <strong>{{currentHighestBid}}</strong>.
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="full-wrapper button-wrapper">
+                    <div class="button-wrapper">
+                        <button [disabled]="editBidForm.invalid" mat-flat-button color="warn">Place Bid</button>
+                        <button mat-flat-button color="war" type="button" (click)="goBack()">Go Back</button>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <div class="controlers-wrapper">
+                    <img src={{imageUrl}} width="480" height="480"/>
+
+
+            </div>
+        </mat-card>
+    </form>
+</div>

@@ -6,7 +6,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AddBidComponent } from './add-bid/add-bid.component';
 import { EditBidComponent } from './edit-bid/edit-bid.component';
-import { DeleteBidComponent } from './delete-bid/delete-bid.component';
 import { ViewBidComponent } from './view-bid/view-bid.component';
 import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [AllBidsComponent, AddBidComponent, EditBidComponent, DeleteBidComponent, ViewBidComponent],
+  declarations: [AllBidsComponent, AddBidComponent, EditBidComponent, ViewBidComponent],
   imports: [
     CommonModule,
     MatTableModule,

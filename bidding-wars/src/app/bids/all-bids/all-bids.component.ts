@@ -40,7 +40,7 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
-
+  
   deleteBid(index: number, e){
     if(window.confirm('Are you sure you want to delete this bid?')) {
       const data = this.dataSource.data;

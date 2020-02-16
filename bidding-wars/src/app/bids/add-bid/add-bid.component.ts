@@ -28,7 +28,6 @@ export class AddBidComponent implements OnInit {
       console.log(user);
      this.user = user;
     });
-    console.log(this.user);
     this.bidApi.getBidsList();  // Call GetStudentsList() before main form is being called
     this.bidForm();              // Call student form when component is ready
   }
@@ -39,7 +38,7 @@ export class AddBidComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(30)]],
       createdOn: [new Date().toISOString().substring(0, 10)],
       endsOn: ['', [Validators.required]],
-      highestBid: [[null], [Validators.required]],
+      highestBid: [[null], [Validators.required, Validators.min(0)]],
       highestBidder: [''],
       highestBidderEmail: [''],
       imageUrl: ['', [Validators.required]],
