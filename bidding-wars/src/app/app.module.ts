@@ -14,6 +14,7 @@ import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material.module';
 import { BidsService } from './bids/bids.service';
 
+
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -23,6 +24,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage'; // Only requir
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';       // Only required for auth features
+import { ProfileComponent } from './user/profile/profile.component';
 
 
 @NgModule({
@@ -33,7 +35,7 @@ import { ContactComponent } from './contact/contact.component';       // Only re
     RegisterComponent,
     AboutComponent,
     ContactComponent,
-
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { ContactComponent } from './contact/contact.component';       // Only re
     BidsModule,
     HomeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     AuthService,
