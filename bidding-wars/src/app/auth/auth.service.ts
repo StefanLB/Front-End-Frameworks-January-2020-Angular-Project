@@ -77,4 +77,11 @@ export class AuthService {
       role: 'network user'
     })
   }
+
+  updateUser(userData) {
+    this.afAuth.auth.currentUser.updateProfile({
+      displayName: userData.userName,
+      photoURL: userData.imageUrl
+    })
+  }
 }
