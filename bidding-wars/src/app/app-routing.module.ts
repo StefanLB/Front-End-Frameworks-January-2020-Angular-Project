@@ -10,6 +10,7 @@ import { EditBidComponent } from './bids/edit-bid/edit-bid.component';
 import { HomeComponent } from './home/home.component';
 import { ViewBidComponent } from './bids/view-bid/view-bid.component';
 import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'bids/edit/:id', component: EditBidComponent },
   { path: 'bids/:id', component: ViewBidComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

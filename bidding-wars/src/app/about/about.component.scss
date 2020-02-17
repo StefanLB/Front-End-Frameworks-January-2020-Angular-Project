@@ -1,5 +1,14 @@
-.about-us-image{
-    display: block;
-    margin: 0 auto;
-    padding-top: 50px;
-}
+.about-us {
+    margin: auto;
+    width: 50%;
+  }
+  
+  .about-header-image {
+    background-image: url('../../assets/gavelIcon.png');
+    background-size: cover;
+  }
+
+  .piper {
+      color: red;
+      font-weight:bold;
+  }
