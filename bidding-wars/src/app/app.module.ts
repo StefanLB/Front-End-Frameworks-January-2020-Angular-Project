@@ -20,7 +20,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore'; // Only required for database features
 import { AngularFireStorageModule } from '@angular/fire/storage'; // Only required for storage features
-import { AngularFireAuthModule } from '@angular/fire/auth';       // Only required for auth features
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';       // Only required for auth features
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';       // Only requir
     NotFoundComponent,
     LoginComponent,
     RegisterComponent,
+    AboutComponent,
+    ContactComponent,
 
   ],
   imports: [
