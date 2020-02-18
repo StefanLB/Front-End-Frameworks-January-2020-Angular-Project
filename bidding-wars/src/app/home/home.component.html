@@ -1,55 +1,60 @@
-<div class="header">
-    <mat-card>
-        <mat-card-content>
-            <h2>Welcome to Bidding Wars!</h2>
-            <h4>Check out some of our most recent auctions. <span class="hover-link" (click)="login()">Login</span>  or <span class="hover-link" (click)="register()">Register</span> to join the Frenzy!</h4>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div>
-</div>
-<mat-divider class="header-divider"></mat-divider>
-<div class="row">
-    <div class="col-md-4">
-        <mat-card class="example-card"> 
-            <mat-card-header>
-                <img mat-card-avatar src="../../assets/empty-icons8-sand-timer-50.png">
-                <mat-card-title>{{sampleBids[0]?.name}}</mat-card-title>
-                <mat-card-subtitle>Current Bid: &#36; {{sampleBids[0]?.highestBid}}</mat-card-subtitle>
-            </mat-card-header>
-            <img class="bid-image" mat-card-image src={{sampleBids[0]?.imageUrl}}
-                alt="Bid Image">
-            <mat-card-content >
-                <div class="cut-text"> {{sampleBids[0]?.description}} ADD LOADING BAR WHILE BIDS ARE LOADING!!! Cut off at 30th symbol!!!</div>
+<ng-container *ngIf="isReady">
+    <div class="header">
+        <mat-card>
+            <mat-card-content>
+                <h2>Welcome to Bidding Wars!</h2>
+                <h4>Check out some of our most recent auctions. <span class="hover-link" (click)="login()">Login</span>
+                    or <span class="hover-link" (click)="register()">Register</span> to join the Frenzy!</h4>
             </mat-card-content>
         </mat-card>
     </div>
-    <div class="col-md-4">
-        <mat-card class="example-card"> 
-            <mat-card-header>
-                <img mat-card-avatar src="../../assets/half-icons8-hourglass-50.png">
-                <mat-card-title>{{sampleBids[1]?.name}}</mat-card-title>
-                <mat-card-subtitle>Current Bid: &#36; {{sampleBids[1]?.highestBid}}</mat-card-subtitle>
-            </mat-card-header>
-            <img class="bid-image" mat-card-image src={{sampleBids[1]?.imageUrl}}
-                alt="Bid Image">
-            <mat-card-content >
-                <div class="cut-text"> {{sampleBids[1]?.description}} ADD LOADING BAR WHILE BIDS ARE LOADING!!! Cut off at 30th symbol!!!</div>
-            </mat-card-content>
-        </mat-card>
+    <div>
     </div>
-    <div class="col-md-4">
-        <mat-card class="example-card"> 
-            <mat-card-header>
-                <img mat-card-avatar src="../../assets/full-icons8-sand-watch-50.png">
-                <mat-card-title>{{sampleBids[2]?.name}}</mat-card-title>
-                <mat-card-subtitle>Current Bid: &#36; {{sampleBids[2]?.highestBid}}</mat-card-subtitle>
-            </mat-card-header>
-            <img class="bid-image" mat-card-image src={{sampleBids[2]?.imageUrl}}
-                alt="Bid Image">
-            <mat-card-content >
-                <div class="cut-text"> {{sampleBids[2]?.description}} ADD LOADING BAR WHILE BIDS ARE LOADING!!! Cut off at 30th symbol!!!</div>
-            </mat-card-content>
-        </mat-card>
+    <mat-divider class="header-divider"></mat-divider>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <img mat-card-avatar src="../../assets/empty-icons8-sand-timer-50.png">
+                    <mat-card-title>{{sampleBids[0]?.name}}</mat-card-title>
+                    <mat-card-subtitle>Current Bid: &#36; {{sampleBids[0]?.highestBid}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class="bid-image" mat-card-image src={{sampleBids[0]?.imageUrl}} alt="Bid Image">
+                <mat-card-content>
+                    <div class="cut-text"> {{sampleBids[0]?.description}}</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <img mat-card-avatar src="../../assets/half-icons8-hourglass-50.png">
+                    <mat-card-title>{{sampleBids[1]?.name}}</mat-card-title>
+                    <mat-card-subtitle>Current Bid: &#36; {{sampleBids[1]?.highestBid}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class="bid-image" mat-card-image src={{sampleBids[1]?.imageUrl}} alt="Bid Image">
+                <mat-card-content>
+                    <div class="cut-text"> {{sampleBids[1]?.description}}</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <img mat-card-avatar src="../../assets/full-icons8-sand-watch-50.png">
+                    <mat-card-title>{{sampleBids[2]?.name}}</mat-card-title>
+                    <mat-card-subtitle>Current Bid: &#36; {{sampleBids[2]?.highestBid}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class="bid-image" mat-card-image src={{sampleBids[2]?.imageUrl}} alt="Bid Image">
+                <mat-card-content>
+                    <div class="cut-text"> {{sampleBids[2]?.description}}</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
-</div>
+</ng-container>
+<ng-container *ngIf="!isReady">
+    <div class="spinner-loader">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+</ng-container>
