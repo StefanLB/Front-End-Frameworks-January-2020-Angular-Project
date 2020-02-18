@@ -4,7 +4,7 @@
     <button mat-button routerLink="/">Bidding Wars</button>
 
     <span class="spacer"></span>
-    <button mat-button routerLink="/bids">Home</button>
+    <button *ngIf="user" mat-button routerLink="/bids">Home</button>
     <button *ngIf="!user" mat-button routerLink="/login">Login</button>
     <button *ngIf="!user" mat-button routerLink="/register">Register</button>
     <button *ngIf="user" mat-button routerLink="/profile">Profile</button>

@@ -21,7 +21,7 @@ export class AuthService {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(userCredential => {
         if (userCredential) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/bids']);
         }
       }).catch(err => {
         console.log(err);
@@ -35,7 +35,7 @@ export class AuthService {
   authLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/bids']);
       }).catch((error) => {
         console.log(error)
       })
@@ -61,7 +61,7 @@ export class AuthService {
 
         this.insertUserData(userCredential)
           .then(() => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/bids']);
           });
       }).catch(err => {
         console.log(err);
