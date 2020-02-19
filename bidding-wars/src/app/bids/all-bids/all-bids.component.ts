@@ -41,6 +41,10 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
     this.table.dataSource = this.dataSource;
   }
   
+  get isReady(){
+    return this.dataSource.data.length > 0;
+  }
+
   deleteBid(index: number, e){
     if(window.confirm('Are you sure you want to delete this bid?')) {
       const data = this.dataSource.data;

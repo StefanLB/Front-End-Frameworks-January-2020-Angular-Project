@@ -11,6 +11,8 @@ import { BidDialogComponent } from './bid-dialog/bid-dialog.component';
 import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatProgressBarModule } from '@angular/material';
+
 
 
 
@@ -24,7 +26,8 @@ import { RouterModule } from '@angular/router';
     MatSortModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatProgressBarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
