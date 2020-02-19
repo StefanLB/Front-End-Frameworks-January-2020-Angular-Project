@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Bid } from './bid';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class BidsService {
 
   constructor(
     private db: AngularFireDatabase,
-    public router: Router
+    public router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   // Create Bid
@@ -28,9 +30,10 @@ export class BidsService {
       highestBid: bid.highestBid,
       highestBidder: bid.highestBidder,
       highestBidderEmail: bid.highestBidderEmail
-    });
-
-    this.router.navigate(['bids']);
+    })
+      .then(() => {
+        this.snackBar.open('Bid successfully created!', 'Dismiss', { duration: 2000 });
+      });
   }
 
   // Fetch Single Bid Object
@@ -51,6 +54,10 @@ export class BidsService {
       highestBid: bid.highestBid,
       highestBidder: bid.highestBidder
     })
+      .then(() => {
+        this.snackBar.open('Bid successfully placed!', 'Dismiss', { duration: 2000 });
+        this.router.navigate(['bids']);
+      });
   }
 
   // Update New Bid Object
@@ -61,19 +68,23 @@ export class BidsService {
       endsOn: bid.endsOn,
       imageUrl: bid.imageUrl,
       highestBid: bid.highestBid
+    }).then(() => {
+      this.snackBar.open('Bid successfully updated!', 'Dismiss', { duration: 2000 });
+      this.router.navigate(['bids']);
     });
-
-    this.router.navigate(['bids']);
   }
 
   // Delete New Bid Object
   deleteBid(id: string) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO DELETE BIDS IF NO ONE HAS YET MADE AN OFFER ***/
     this.bidRef = this.db.object('all-bids/' + id);
     this.bidRef.remove()
+      .then(() => {
+        this.snackBar.open('Bid successfully deleted!', 'Dismiss', { duration: 2000 });
+        this.router.navigate(['bids']);
+      })
       .catch(error => {
         console.log(error);
       });
 
-    this.router.navigate(['bids']);
   }
 }

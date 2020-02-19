@@ -60,9 +60,6 @@ export class AddBidComponent implements OnInit {
 
   resetForm() {
     this.bidsForm.reset();
-    Object.keys(this.bidsForm.controls).forEach(key => {
-      this.bidsForm.controls[key].setErrors(null)
-    });
   }
 
   submitBidData() {

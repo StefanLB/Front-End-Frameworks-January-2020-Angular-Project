@@ -81,7 +81,6 @@ export class ViewBidComponent implements OnInit {
     var id = this.actRoute.snapshot.paramMap.get('id');
     if(window.confirm('Are you sure you want to place your bid?')){
         this.bidApi.updateBid(id, this.editBidForm.value);
-      this.router.navigate(['bids']);
     }
   }
 }
