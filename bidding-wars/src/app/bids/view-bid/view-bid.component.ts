@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Location } from '@angular/common';
 import { BidsService } from '../bids.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
 
 @Component({
   selector: 'app-view-bid',
@@ -18,27 +20,49 @@ export class ViewBidComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    public fb: FormBuilder,    
+    public fb: FormBuilder,
     private location: Location,
     private bidApi: BidsService,
     private actRoute: ActivatedRoute,
-    private router: Router
+    private dialog: MatDialog,
   ) {
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.bidApi.getBid(id).valueChanges().subscribe(data => {
       this.populateEditBidForm(data);
-   })
+    })
   }
 
   ngOnInit() {
     this.auth.getUserState()
-    .subscribe(user => {
-     this.user = user;
-    });
+      .subscribe(user => {
+        this.user = user;
+      });
     this.updateBidForm();
   }
 
-  populateEditBidForm(data){
+  confirmBidDialog() {
+    let dialogRef = this.dialog.open(BidDialogComponent,
+      {
+        data: {
+          action: "Bid",
+          actionDescription: `bid $${this.editBidForm.get('highestBid').value} on ${this.editBidForm.get('name').value}`,
+          confirmPhrase: "Place Bid"
+        }
+      });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      console.log(result);
+
+      if (result) {
+        this.updateBid();
+      }
+    });
+
+  }
+
+  populateEditBidForm(data) {
     this.editBidForm.patchValue({
       name: data.name,
       description: data.description,
@@ -50,7 +74,7 @@ export class ViewBidComponent implements OnInit {
     this.imageUrl = data.imageUrl;
   }
 
-  updateBidForm(){
+  updateBidForm() {
     this.editBidForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
@@ -68,7 +92,7 @@ export class ViewBidComponent implements OnInit {
     return this.editBidForm.controls[controlName].hasError(errorName);
   }
 
-  goBack(){
+  goBack() {
     this.location.back();
   }
 
@@ -79,8 +103,6 @@ export class ViewBidComponent implements OnInit {
     this.editBidForm.get('highestBidderEmail').setValue(this.user.email);
 
     var id = this.actRoute.snapshot.paramMap.get('id');
-    if(window.confirm('Are you sure you want to place your bid?')){
-        this.bidApi.updateBid(id, this.editBidForm.value);
-    }
+    this.bidApi.updateBid(id, this.editBidForm.value);
   }
 }

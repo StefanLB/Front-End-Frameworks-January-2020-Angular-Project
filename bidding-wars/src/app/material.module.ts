@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, MatBadgeModule, MatSidenavModule, MatListModule, MatGridListModule, MatFormFieldModule, MatSelectModule, MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatChipsModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatCardModule, MatSnackBarModule} from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, MatBa
         MatTableModule,
         MatPaginatorModule,
         MatCardModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatDialogModule
     ],
     exports:[
         MatButtonModule,
@@ -41,7 +43,8 @@ import { MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, MatBa
         MatTableModule,
         MatPaginatorModule,
         MatCardModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatDialogModule
     ],
     providers: [
        MatDatepickerModule,
