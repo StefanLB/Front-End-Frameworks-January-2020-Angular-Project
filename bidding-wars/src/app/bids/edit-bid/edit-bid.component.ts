@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { BidsService } from '../bids.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
 
 
 @Component({
@@ -18,27 +20,28 @@ export class EditBidComponent implements OnInit {
 
   ngOnInit() {
     this.auth.getUserState()
-    .subscribe(user => {
-     this.user = user;
-    });
+      .subscribe(user => {
+        this.user = user;
+      });
     this.updateBidForm();
   }
 
   constructor(
     private auth: AuthService,
-    public fb: FormBuilder,    
+    public fb: FormBuilder,
     private location: Location,
     private bidApi: BidsService,
     private actRoute: ActivatedRoute,
-    private router: Router
-  ) { 
+    private router: Router,
+    private dialog: MatDialog
+  ) {
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.bidApi.getBid(id).valueChanges().subscribe(data => {
       this.populateEditBidForm(data);
     })
   }
 
-  populateEditBidForm(data){
+  populateEditBidForm(data) {
     this.editBidForm.patchValue({
       name: data.name,
       description: data.description,
@@ -48,7 +51,7 @@ export class EditBidComponent implements OnInit {
     });
   }
 
-  updateBidForm(){
+  updateBidForm() {
     this.editBidForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
@@ -73,8 +76,27 @@ export class EditBidComponent implements OnInit {
     })
   }
 
-  goBack(){
+  goBack() {
     this.location.back();
+  }
+
+  updateBidDialog() {
+    let dialogRef = this.dialog.open(BidDialogComponent,
+      {
+        data: {
+          action: "Update",
+          actionDescription: `update bid ${this.editBidForm.get('name').value}`,
+          confirmPhrase: "Update Bid"
+        }
+      });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "true") {
+        this.updateBid();
+      }
+    });
+
   }
 
   updateBid() {
@@ -84,9 +106,6 @@ export class EditBidComponent implements OnInit {
     this.editBidForm.get('highestBidderEmail').setValue(this.user.email);
 
     var id = this.actRoute.snapshot.paramMap.get('id');
-    if(window.confirm('Are you sure you want to update this bid?')){
-        this.bidApi.updateNewBid(id, this.editBidForm.value);
-      this.router.navigate(['bids']);
-    }
+    this.bidApi.updateNewBid(id, this.editBidForm.value);
   }
 }

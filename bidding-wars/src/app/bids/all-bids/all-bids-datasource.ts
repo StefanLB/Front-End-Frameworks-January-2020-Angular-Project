@@ -16,14 +16,14 @@ export class AllBidsDataSource extends DataSource<Bid> {
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor(private bidApi: BidsService) {
+  constructor(bidApi : BidsService) {
     super();
-    this.bidApi.getBidsList()
+    bidApi.getBidsList()
     .snapshotChanges().subscribe(bids => {
       bids.forEach(item => {
           let a = item.payload.toJSON();
           a['$key'] = item.key;
-          this.data.push(a as Bid)
+          this.data.push(a as Bid);
         })
       });
   }

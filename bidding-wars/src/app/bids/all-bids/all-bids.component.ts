@@ -5,6 +5,8 @@ import { MatTable } from '@angular/material/table';
 import { AllBidsDataSource } from './all-bids-datasource';
 import { Bid } from '../bid';
 import { BidsService } from '../bids.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
 
 @Component({
   selector: 'app-all-bids',
@@ -16,6 +18,7 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatTable, {static: false}) table: MatTable<Bid>;
   dataSource: AllBidsDataSource;
+  data: Bid[] = [];
 
   displayedColumns = [
   'name',
@@ -28,7 +31,9 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
   ];
 
   constructor(
-    private bidApi: BidsService
+    private bidApi: BidsService,
+    private dialog: MatDialog
+
   ) { }
 
   ngOnInit() {
@@ -42,15 +47,36 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
   }
   
   get isReady(){
-    return this.dataSource.data.length > 0;
+
+    return true;
+    if(this.dataSource !== undefined){
+      return this.dataSource.data.length > 0;
+    }
   }
 
   deleteBid(index: number, e){
-    if(window.confirm('Are you sure you want to delete this bid?')) {
       const data = this.dataSource.data;
       data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
       this.dataSource.data = data;
       this.bidApi.deleteBid(e.$key);
-    }
+  }
+
+  confirmDeleteDialog(index: number, e) {
+    let dialogRef = this.dialog.open(BidDialogComponent,
+      {
+        data: {
+          action: "Delete",
+          actionDescription: "delete this bid",
+          confirmPhrase: "Delete Bid"
+        }
+      });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "true") {
+        this.deleteBid(index, e);
+      }
+    });
+
   }
 }

@@ -39,7 +39,7 @@
             [routerLink]="['/bids/', row?.$key]">Details</button>
           <button mat-raised-button color="primary" class="push-right"
             [routerLink]="['/bids/edit/', row?.$key]">Edit</button>
-          <button mat-raised-button color="warn" (click)="deleteBid(i, row)">Delete</button>
+          <button mat-raised-button color="warn" (click)="confirmDeleteDialog(i, row)">Delete</button>
         </td>
       </ng-container>
 

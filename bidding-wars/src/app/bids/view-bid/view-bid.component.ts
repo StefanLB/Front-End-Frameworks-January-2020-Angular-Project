@@ -52,10 +52,7 @@ export class ViewBidComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-
-      console.log(result);
-
-      if (result) {
+      if (result == "true") {
         this.updateBid();
       }
     });
