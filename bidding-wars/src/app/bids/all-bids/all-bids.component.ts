@@ -1,9 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { AllBidsDataSource } from './all-bids-datasource';
 import { Bid } from '../bid';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { BidsService } from '../bids.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
@@ -13,52 +10,57 @@ import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
   templateUrl: './all-bids.component.html',
   styleUrls: ['./all-bids.component.scss']
 })
-export class AllBidsComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<Bid>;
-  dataSource: AllBidsDataSource;
-  data: Bid[] = [];
 
-  displayedColumns = [
-  'name',
-  'createdOn',
-  'endsOn',
-  'imageUrl',
-  'seller',
-  'highestBid',
-  'action'
+export class AllBidsComponent {
+
+  dataSource: MatTableDataSource<Bid>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  BidData: any = [];
+
+  displayedColumns: any[] = [
+    'name',
+    'createdOn',
+    'endsOn',
+    'imageUrl',
+    'seller',
+    'highestBid',
+    'action'
   ];
 
   constructor(
     private bidApi: BidsService,
     private dialog: MatDialog
-
-  ) { }
-
-  ngOnInit() {
-    this.dataSource = new AllBidsDataSource(this.bidApi);
+    ) {
+    this.bidApi.getBidsList()
+      .snapshotChanges().subscribe(bids => {
+        bids.forEach(item => {
+          let a = item.payload.toJSON();
+          a['$key'] = item.key;
+          this.BidData.push(a as Bid)
+        })
+        /* Data table */
+        this.dataSource = new MatTableDataSource(this.BidData);
+        /* Pagination */
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }, 0);
+      })
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
-  }
-  
-  get isReady(){
-
-    return true;
-    if(this.dataSource !== undefined){
-      return this.dataSource.data.length > 0;
+  get isReady() {
+    if (this.BidData.length > 0) {
+      return true;
     }
+    return false;
   }
 
-  deleteBid(index: number, e){
-      const data = this.dataSource.data;
-      data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
-      this.dataSource.data = data;
-      this.bidApi.deleteBid(e.$key);
+  deleteBid(index: number, e) {
+    this.bidApi.deleteBid(e.$key);
+    const data = this.dataSource.data;
+    data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
+    this.dataSource.data = data;
   }
 
   confirmDeleteDialog(index: number, e) {
@@ -71,12 +73,11 @@ export class AllBidsComponent implements AfterViewInit, OnInit {
         }
       });
 
-
     dialogRef.afterClosed().subscribe(result => {
       if (result == "true") {
         this.deleteBid(index, e);
       }
     });
-
   }
+
 }

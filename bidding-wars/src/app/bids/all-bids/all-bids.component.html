@@ -1,45 +1,44 @@
 <ng-container *ngIf="isReady">
   <div class="mat-elevation-z8">
-    <table mat-table class="full-width-table" matSort aria-label="Elements">
-
+    <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let row">{{row?.name}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="createdOn">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created On</th>
-        <td mat-cell *matCellDef="let row">{{row?.createdOn}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created On </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdOn}} </td>
       </ng-container>
 
       <ng-container matColumnDef="endsOn">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ends On</th>
-        <td mat-cell *matCellDef="let row">{{row?.endsOn}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ends On </th>
+        <td mat-cell *matCellDef="let element"> {{element.endsOn}} </td>
       </ng-container>
 
       <ng-container matColumnDef="imageUrl">
-        <th mat-header-cell *matHeaderCellDef>Image Url</th>
-        <td mat-cell *matCellDef="let row"> <img [src]="row?.imageUrl" height="128" width="128" /> </td>
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let element"> <img [src]="element.imageUrl" height="128" width="128" /> </td>
       </ng-container>
 
       <ng-container matColumnDef="seller">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Seller</th>
-        <td mat-cell *matCellDef="let row">{{row?.seller}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Seller </th>
+        <td mat-cell *matCellDef="let element"> {{element.seller}} </td>
       </ng-container>
 
       <ng-container matColumnDef="highestBid">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Highest Bid</th>
-        <td mat-cell *matCellDef="let row">$&nbsp; {{row?.highestBid}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Highest Bid </th>
+        <td mat-cell *matCellDef="let element"> {{element.highestBid}} </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let row; let i = index;">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element; let i = index;">
           <button mat-raised-button color="primary" class="push-right"
-            [routerLink]="['/bids/', row?.$key]">Details</button>
+            [routerLink]="['/bids/', element?.$key]">Details</button>
           <button mat-raised-button color="primary" class="push-right"
-            [routerLink]="['/bids/edit/', row?.$key]">Edit</button>
-          <button mat-raised-button color="warn" (click)="confirmDeleteDialog(i, row)">Delete</button>
+            [routerLink]="['/bids/edit/', element?.$key]">Edit</button>
+          <button mat-raised-button color="warn" (click)="confirmDeleteDialog(i, element)">Delete</button>
         </td>
       </ng-container>
 
@@ -47,9 +46,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
-      [pageSizeOptions]="[10, 25, 50]">
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </ng-container>
 <ng-container *ngIf="!isReady">
