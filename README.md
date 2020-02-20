@@ -1,6 +1,6 @@
 ![](https://img.shields.io/github/stars/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
 ![](https://img.shields.io/github/issues/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
-![](https://img.shields.io/github/commit-activity/w/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/repo-size/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
 ![](https://img.shields.io/github/license/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
 
 # Front-End-Frameworks-January-2020-Angular-Project
@@ -74,6 +74,6 @@ ng s --open
 
 ---
 
-![](https://img.shields.io/github/repo-size/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/commit-activity/w/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
 ![](https://img.shields.io/github/forks/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
 ![](https://img.shields.io/github/tag/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
