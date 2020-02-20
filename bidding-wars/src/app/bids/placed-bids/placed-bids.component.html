@@ -1,0 +1,46 @@
+<ng-container *ngIf="isReady">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="createdOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created On </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdOn}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="endsOn">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ends On </th>
+          <td mat-cell *matCellDef="let element"> {{element.endsOn}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="imageUrl">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let element"> <img [src]="element.imageUrl" height="128" width="128" /> </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="highestBid">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Highest Bid </th>
+          <td mat-cell *matCellDef="let element"> {{element.highestBid}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+            <button mat-raised-button color="primary" class="push-right"
+              [routerLink]="['/bids/', element?.$key]">Details</button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isReady">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-container>

@@ -13,12 +13,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material';
 import { CreatedBidsComponent } from './created-bids/created-bids.component';
+import { PlacedBidsComponent } from './placed-bids/placed-bids.component';
 
 
 
 
 @NgModule({
-  declarations: [AllBidsComponent, AddBidComponent, EditBidComponent, ViewBidComponent, BidDialogComponent, CreatedBidsComponent],
+  declarations: [AllBidsComponent, AddBidComponent, EditBidComponent, ViewBidComponent, BidDialogComponent, CreatedBidsComponent, PlacedBidsComponent],
   entryComponents: [BidDialogComponent],
   imports: [
     CommonModule,

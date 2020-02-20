@@ -13,6 +13,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { CreatedBidsComponent } from './bids/created-bids/created-bids.component';
+import { PlacedBidsComponent } from './bids/placed-bids/placed-bids.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, /*canActivate: [SecureInnerPagesGuard]*/ },
   { path: 'bids', component: AllBidsComponent},
   { path: 'bids/add', component: AddBidComponent },
-  { path: 'bids/placed', component: NotFoundComponent },
+  { path: 'bids/placed', component: PlacedBidsComponent },
   { path: 'bids/created', component: CreatedBidsComponent },
   { path: 'bids/edit/:id', component: EditBidComponent },
   { path: 'bids/:id', component: ViewBidComponent },
