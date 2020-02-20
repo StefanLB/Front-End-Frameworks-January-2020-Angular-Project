@@ -1,5 +1,12 @@
+
+![](https://img.shields.io/github/commit-activity/m/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/stars/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/issues/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/tag/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+
 # Front-End-Frameworks-January-2020-Angular-Project
 SoftUni Front-end Frameworks Individual Project Assignment
+
 
 ## Bidding Wars
 
@@ -65,3 +72,9 @@ Once all dependencies are installed, build and launch the application through th
 ```
 ng s --open
 ```
+
+---
+
+![](https://img.shields.io/github/repo-size/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/forks/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
+![](https://img.shields.io/github/license/StefanLB/Front-End-Frameworks-January-2020-Angular-Project)
