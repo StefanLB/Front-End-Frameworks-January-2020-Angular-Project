@@ -41,7 +41,6 @@ export class PlacedBidsComponent {
             bids.forEach(item => {
               let a = item.payload.toJSON();
               if (Object.values(((a as Bid).bidders)).includes(userEmail)) {
-                console.log(a);
                 a['$key'] = item.key;
                 this.BidData.push(a as Bid)
               }

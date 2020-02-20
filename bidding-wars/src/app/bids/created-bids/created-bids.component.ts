@@ -43,7 +43,6 @@ export class CreatedBidsComponent {
             bids.forEach(item => {
               let a = item.payload.toJSON();
               if ((a as Bid).sellerEmail == userEmail) {
-                console.log(a);
                 a['$key'] = item.key;
                 this.BidData.push(a as Bid)
               }
