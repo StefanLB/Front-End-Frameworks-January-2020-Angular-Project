@@ -25,7 +25,6 @@ export class AddBidComponent implements OnInit {
   ngOnInit() {
     this.auth.getUserState()
     .subscribe(user => {
-      console.log(user);
      this.user = user;
     });
     this.bidApi.getBidsList();  // Call GetStudentsList() before main form is being called

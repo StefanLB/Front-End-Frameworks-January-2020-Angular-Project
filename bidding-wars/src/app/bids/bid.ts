@@ -10,4 +10,5 @@ export interface Bid {
     highestBid?: number;
     highestBidder?: string;
     highestBidderEmail?: string;
+    bidders?: Array<string>;
 }

@@ -29,7 +29,8 @@ export class BidsService {
       sellerEmail: bid.sellerEmail,
       highestBid: bid.highestBid,
       highestBidder: bid.highestBidder,
-      highestBidderEmail: bid.highestBidderEmail
+      highestBidderEmail: bid.highestBidderEmail,
+      bidders: ['']
     })
       .then(() => {
         this.snackBar.open('Bid successfully created!', 'Dismiss', { duration: 2000 });
@@ -52,7 +53,8 @@ export class BidsService {
   updateBid(id, bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
     this.bidRef.update({ //*** NOTE2: THE UPDATE BID SHOULD ALSO BE USED FOR WHEN SOMEONE BIDS ON AN OFFER ***/
       highestBid: bid.highestBid,
-      highestBidder: bid.highestBidder
+      highestBidder: bid.highestBidder,
+      bidders: bid.bidders
     })
       .then(() => {
         this.snackBar.open('Bid successfully placed!', 'Dismiss', { duration: 2000 });

@@ -65,7 +65,8 @@ export class ViewBidComponent implements OnInit {
       description: data.description,
       endsOn: data.endsOn,
       highestBid: +data.highestBid,
-      imageUrl: data.imageUrl
+      imageUrl: data.imageUrl,
+      bidders: data.bidders
     });
     this.currentHighestBid = data.highestBid;
     this.imageUrl = data.imageUrl;
@@ -81,7 +82,8 @@ export class ViewBidComponent implements OnInit {
       highestBidderEmail: [''],
       imageUrl: ['', [Validators.required]],
       seller: [''],
-      sellerEmail: ['']
+      sellerEmail: [''],
+      bidders: ['']
     })
   }
 
@@ -98,6 +100,9 @@ export class ViewBidComponent implements OnInit {
     this.editBidForm.get('sellerEmail').setValue(this.user.email);
     this.editBidForm.get('highestBidder').setValue(this.user.displayName);
     this.editBidForm.get('highestBidderEmail').setValue(this.user.email);
+    this.editBidForm.get('bidders').setValue(
+      new Array(...this.editBidForm.get('bidders').value, this.user.email)
+    );
 
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.bidApi.updateBid(id, this.editBidForm.value);
