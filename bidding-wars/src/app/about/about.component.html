@@ -1,23 +1,27 @@
-<mat-card class="about-us">
+<div class=about-us-container>
+  <mat-card class="about-us">
     <mat-card-header>
-        <div mat-card-avatar class="about-header-image"></div>
-        <mat-card-title>About Us</mat-card-title>
+      <div mat-card-avatar class="about-header-image"></div>
+      <mat-card-title>About Us</mat-card-title>
     </mat-card-header>
     <img mat-card-image src="../../assets/about.png" alt="About">
     <mat-card-content>
-        <p>
-            Got stuff you don't want? Auction it! Like stuff you don't have? Bid on it!
-          </p>
-          <p>
-            Bid on items before their auction end date expires and if you've placed the highest bid - you win! <span class="piper">Don't forget to pay the piper.</span>
-          </p>
-          <p>
-            Add items for auction, set the auction end date and their starting bid price. Watch other people outbid eachother! Sometimes you win and sometimes you lose!
-            Have fun!
-          </p>
+      <p>
+        Got stuff you don't want? Auction it! Like stuff you don't have? Bid on it!
+      </p>
+      <p>
+        Bid on items before their auction end date expires and if you've placed the highest bid - you win! <span
+          class="piper">Don't forget to pay the piper.</span>
+      </p>
+      <p>
+        Add items for auction, set the auction end date and their starting bid price. Watch other people outbid
+        eachother! Sometimes you win and sometimes you lose!
+        Have fun!
+      </p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button (click)="goBack()">OK, GOT IT</button>
-        <button mat-button (click)="goBack()">TAKE ME BACK</button>
+      <button mat-button (click)="goBack()">OK, GOT IT</button>
+      <button mat-button (click)="goBack()">TAKE ME BACK</button>
     </mat-card-actions>
-</mat-card>
+  </mat-card>
+</div>

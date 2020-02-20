@@ -1,81 +1,83 @@
-<div class="title-group">
-    <h1 class="mat-h1">Edit Bid</h1>
-    <mat-divider fxFlex="1 0"></mat-divider>
-</div>
+<div class="edit-bid-container">
+    <div class="title-group">
+        <h1 class="mat-h1">Edit Bid</h1>
+        <mat-divider fxFlex="1 0"></mat-divider>
+    </div>
 
-<div class="inner-wrapper">
-    <form [formGroup]="editBidForm" (ngSubmit)="updateBidDialog()" novalidate>
-        <mat-card>
-            <div class="controlers-wrapper">
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Bid name" formControlName="name" minlength="6" maxlength="30">
-                    <mat-error *ngIf="handleError('name', 'required')">
-                        Please provide a <strong>bid name</strong>.
-                    </mat-error>
-                    <mat-error *ngIf="handleError('name', 'minlength')">
-                        Name should be at least 6 characters.
-                    </mat-error>
-                    <mat-error *ngIf="handleError('name', 'maxlength')">
-                        Name should be no more than 30 characters.
-                    </mat-error>
-                </mat-form-field>
+    <div class="inner-wrapper">
+        <form [formGroup]="editBidForm" (ngSubmit)="updateBidDialog()" novalidate>
+            <mat-card>
+                <div class="controlers-wrapper">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Bid name" formControlName="name" minlength="6" maxlength="30">
+                        <mat-error *ngIf="handleError('name', 'required')">
+                            Please provide a <strong>bid name</strong>.
+                        </mat-error>
+                        <mat-error *ngIf="handleError('name', 'minlength')">
+                            Name should be at least 6 characters.
+                        </mat-error>
+                        <mat-error *ngIf="handleError('name', 'maxlength')">
+                            Name should be no more than 30 characters.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <textarea matInput placeholder="Description" formControlName="description" minlength="30"
-                        maxlength="300"></textarea>
-                    <mat-error *ngIf="handleError('description', 'required')">
-                        Please provide a <strong>bid description</strong>.
-                    </mat-error>
-                    <mat-error *ngIf="handleError('description', 'minlength')">
-                        Description should be at least 30 characters.
-                    </mat-error>
-                    <mat-error *ngIf="handleError('description', 'maxlength')">
-                        Description should be no more than 300 characters.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <textarea matInput placeholder="Description" formControlName="description" minlength="30"
+                            maxlength="300"></textarea>
+                        <mat-error *ngIf="handleError('description', 'required')">
+                            Please provide a <strong>bid description</strong>.
+                        </mat-error>
+                        <mat-error *ngIf="handleError('description', 'minlength')">
+                            Description should be at least 30 characters.
+                        </mat-error>
+                        <mat-error *ngIf="handleError('description', 'maxlength')">
+                            Description should be no more than 300 characters.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <input matInput type="number" placeholder="Starting Bid" formControlName="highestBid" min="0">
-                    <span matPrefix>$&nbsp;</span>
-                    <mat-error *ngIf="handleError('highestBid', 'required')">
-                        Please provide a starting bid price.
-                    </mat-error>
-                    <mat-error *ngIf="handleError('highestBid', 'min')">
-                        Starting bid price should be a positive number.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput type="number" placeholder="Starting Bid" formControlName="highestBid" min="0">
+                        <span matPrefix>$&nbsp;</span>
+                        <mat-error *ngIf="handleError('highestBid', 'required')">
+                            Please provide a starting bid price.
+                        </mat-error>
+                        <mat-error *ngIf="handleError('highestBid', 'min')">
+                            Starting bid price should be a positive number.
+                        </mat-error>
+                    </mat-form-field>
 
-                <div class="full-wrapper button-wrapper">
-                    <div class="button-wrapper">
-                        <button [disabled]="editBidForm.invalid" mat-flat-button color="warn">Update</button>
-                        <button mat-flat-button color="war" type="button" (click)="goBack()">Go Back</button>
+                    <div class="full-wrapper button-wrapper">
+                        <div class="button-wrapper">
+                            <button [disabled]="editBidForm.invalid" mat-flat-button color="warn">Update</button>
+                            <button mat-flat-button color="war" type="button" (click)="goBack()">Go Back</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </mat-card>
+            </mat-card>
 
-        <mat-card>
-            <div class="controlers-wrapper">
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="ImageURL" formControlName="imageUrl" pattern="http[s]{0,1}:\/\/.*">
-                    <mat-error *ngIf="handleError('imageUrl', 'required')">
-                        Please provide an image URL.
-                    </mat-error>
-                    <mat-error *ngIf="handleError('imageUrl', 'pattern')">
-                        Please provide a valid image URL.
-                    </mat-error>
-                </mat-form-field>
+            <mat-card>
+                <div class="controlers-wrapper">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="ImageURL" formControlName="imageUrl" pattern="http[s]{0,1}:\/\/.*">
+                        <mat-error *ngIf="handleError('imageUrl', 'required')">
+                            Please provide an image URL.
+                        </mat-error>
+                        <mat-error *ngIf="handleError('imageUrl', 'pattern')">
+                            Please provide a valid image URL.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field>
-                    <input readonly matInput [min]="minDate" [matDatepicker]="picker" placeholder="Ends On"
-                        formControlName="endsOn" (dateChange)="formatDate($event)">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="handleError('endsOn', 'required')">
-                        Bid expiration date is required.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </mat-card>
-    </form>
+                    <mat-form-field>
+                        <input readonly matInput [min]="minDate" [matDatepicker]="picker" placeholder="Ends On"
+                            formControlName="endsOn" (dateChange)="formatDate($event)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="handleError('endsOn', 'required')">
+                            Bid expiration date is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-card>
+        </form>
+    </div>
 </div>
