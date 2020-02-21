@@ -1,5 +1,10 @@
 <ng-container *ngIf="hasData">
   <div class="mat-elevation-z8">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Threadripper 3990x...">
+    </mat-form-field>
+
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
