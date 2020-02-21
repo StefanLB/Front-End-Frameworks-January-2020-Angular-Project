@@ -1,12 +1,16 @@
 img{
-    background-image: url("../../../assets/logo.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
     width: 64px;
     height: 64px;
+    padding: 5px 0 5px 0;
 }
 
 button {
     font-size: 20px;
+}
+
+.logo-button {
+    padding-left: 4px;
 }
