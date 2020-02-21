@@ -14,21 +14,22 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { CreatedBidsComponent } from './bids/created-bids/created-bids.component';
 import { PlacedBidsComponent } from './bids/placed-bids/placed-bids.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'login', component: LoginComponent /*canActivate: */},
-  { path: 'register', component: RegisterComponent, /*canActivate: [SecureInnerPagesGuard]*/ },
-  { path: 'bids', component: AllBidsComponent},
-  { path: 'bids/add', component: AddBidComponent },
-  { path: 'bids/placed', component: PlacedBidsComponent },
-  { path: 'bids/created', component: CreatedBidsComponent },
-  { path: 'bids/edit/:id', component: EditBidComponent },
-  { path: 'bids/:id', component: ViewBidComponent },
+  { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [AuthGuard], data: { isLogged: false} },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard], data: { isLogged: false} },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard], data: { isLogged: false} },
+  { path: 'bids', component: AllBidsComponent, canActivate: [AuthGuard], data: { isLogged: true} },
+  { path: 'bids/add', component: AddBidComponent, canActivate: [AuthGuard], data: { isLogged: true} },
+  { path: 'bids/placed', component: PlacedBidsComponent, canActivate: [AuthGuard], data: { isLogged: true} },
+  { path: 'bids/created', component: CreatedBidsComponent, canActivate: [AuthGuard], data: { isLogged: true} },
+  { path: 'bids/edit/:id', component: EditBidComponent, canActivate: [AuthGuard], data: { isLogged: true} },
+  { path: 'bids/:id', component: ViewBidComponent, canActivate: [AuthGuard], data: { isLogged: true} },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { isLogged: true} },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'profile', component: ProfileComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
