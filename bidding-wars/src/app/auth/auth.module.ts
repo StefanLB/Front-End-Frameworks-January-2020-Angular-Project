@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -16,7 +17,8 @@ import { MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule } from
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class AuthModule { }

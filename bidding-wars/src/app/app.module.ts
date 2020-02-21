@@ -3,10 +3,10 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import { BidsModule } from './bids/bids.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
@@ -14,7 +14,6 @@ import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material.module';
 import { BidsService } from './bids/bids.service';
 import { ContactComponent } from './contact/contact.component';
-import { ProfileComponent } from './user/profile/profile.component';
 
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
@@ -30,11 +29,8 @@ import { AboutComponent } from './about/about.component';
   declarations: [
     AppComponent,
     NotFoundComponent,
-    LoginComponent,
-    RegisterComponent,
     AboutComponent,
     ContactComponent,
-    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +47,8 @@ import { AboutComponent } from './about/about.component';
     HomeModule,
     ReactiveFormsModule,
     FormsModule,
+    AuthModule,
+    UserModule
   ],
   providers: [
     AuthService,
