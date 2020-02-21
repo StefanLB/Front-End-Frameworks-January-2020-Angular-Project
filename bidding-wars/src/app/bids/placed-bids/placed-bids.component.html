@@ -1,4 +1,4 @@
-<ng-container *ngIf="isReady">
+<ng-container *ngIf="hasData">
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
@@ -41,6 +41,17 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
   </ng-container>
-  <ng-container *ngIf="!isReady">
+  <ng-container *ngIf="!hasData && !hasLoaded">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </ng-container>
+  <ng-container *ngIf="!hasData && hasLoaded">
+    <div class="no-bids">
+    <h1 class="mat-h1">No bids placed yet</h1>
+    <mat-divider></mat-divider>
+    <div class="full-wrapper button-wrapper">
+      <div class="button-wrapper">
+        <button type="button" mat-flat-button color="accent" routerLink="/bids">Place Bid</button>
+      </div>
+    </div>
+  </div>
+</ng-container>

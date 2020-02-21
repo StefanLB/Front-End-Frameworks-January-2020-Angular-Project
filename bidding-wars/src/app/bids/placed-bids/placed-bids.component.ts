@@ -18,6 +18,7 @@ export class PlacedBidsComponent {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   user: firebase.User;
   BidData: any = [];
+  hasLoaded: boolean = false;
 
   displayedColumns: any[] = [
     'name',
@@ -53,12 +54,13 @@ export class PlacedBidsComponent {
             }, 0);
           });
         }
+        this.hasLoaded = true; 
       });
 
   }
 
-  get isReady() {
-    if (this.BidData.length > 0) {
+  get hasData() {
+    if (this.BidData.length > 0 ) {
       return true;
     }
     return false;

@@ -20,6 +20,7 @@ export class CreatedBidsComponent {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   user: firebase.User;
   BidData: any = [];
+  hasLoaded: boolean = false;
 
   displayedColumns: any[] = [
     'name',
@@ -55,34 +56,12 @@ export class CreatedBidsComponent {
             }, 0);
           });
         }
+        this.hasLoaded = true; 
       });
-
-      // { Can't figure out how to apply rxjs
-      //   this.auth.getUserState().pipe(
-      //     map(user => user['email']),
-      //     switchMap(userEmail => userEmail ? this.bidApi.getBidsList().snapshotChanges() : empty()))
-      //     .subscribe(bids => {
-      //       bids.forEach(item => {
-      //         let a = item.payload.toJSON();
-      //         if ((a as Bid).sellerEmail == userEmail) {
-      //           console.log(a);
-      //           a['$key'] = item.key;
-      //           this.BidData.push(a as Bid)
-      //         }
-      //       })
-
-      //       this.dataSource = new MatTableDataSource(this.BidData);
-      //       setTimeout(() => {
-      //         this.dataSource.paginator = this.paginator;
-      //         this.dataSource.sort = this.sort;
-      //       }, 0);
-      //     });
-      // }
-
   }
 
-  get isReady() {
-    if (this.BidData.length > 0) {
+  get hasData() {
+    if (this.BidData.length > 0 ) {
       return true;
     }
     return false;

@@ -16,30 +16,32 @@ export class ProfileComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    public fb: FormBuilder  
-    ) { }
+    public fb: FormBuilder
+  ) { }
 
   ngOnInit() {
     this.auth.getUserState()
-    .subscribe(user => {
-      this.user = user;
-    });
+      .subscribe(user => {
+        this.user = user;
+      });
     this.updateProfileForm();
   }
 
-  updateProfileForm(){
+  updateProfileForm() {
     this.editProfileForm = this.fb.group({
       userName: ['', [Validators.required]],
       imageUrl: ['', [Validators.required]]
     })
   }
 
-  logout(){
-    this.auth.logout();
-    this.router.navigate(['/']);
+  logout() {
+    this.auth.logout().then(() => {
+        this.router.navigate(['/']);
+      }
+    );
   }
 
-  updateProfile(){
+  updateProfile() {
     this.auth.updateUser({
       userName: this.editProfileForm.get('userName').value ? this.editProfileForm.get('userName').value : this.user.displayName,
       imageUrl: this.editProfileForm.get('imageUrl').value ? this.editProfileForm.get('imageUrl').value : this.user.photoURL
