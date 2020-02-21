@@ -1,52 +1,77 @@
-<div class="medium-list" >
+<div class="medium-list">
   <div class="list-viewer-wrapper">
     <div class="list-header-title">Register</div>
 
     <form [formGroup]="registerForm" (ngSubmit)="createUser()">
       <div class="form-container">
         <mat-form-field>
-          <input id="userName"
-                 matInput
-                 formControlName="userName"
-                 placeholder="Enter username" />
+          <input id="userName" matInput formControlName="userName" placeholder="Enter username" />
+          <mat-error *ngIf="handleError('userName', 'required')">
+            Please provide a username.
+          </mat-error>
+          <mat-error *ngIf="handleError('userName', 'minlength')">
+            Username must be at least 6 characters long.
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input id="email"
-                   matInput
-                   formControlName="email"
-                   placeholder="Enter your email" />
-          </mat-form-field>
+          <input id="email" matInput formControlName="email" placeholder="Enter your email" />
+          <mat-error *ngIf="handleError('email', 'required')">
+            Please provide an email.
+          </mat-error>
+          <mat-error *ngIf="handleError('email', 'email')">
+            Please provide a valid email.
+          </mat-error>
+        </mat-form-field>
 
         <mat-form-field>
-            <input id="password"
-                   matInput
-                   formControlName="password"
-                   placeholder="Enter your password"
-                   [type]="hide ? 'password':'text'" />
-              <mat-icon matSuffix (click)="hide = !hide">
-                {{hide ? 'visibility' : 'visibility_off'}}
-              </mat-icon>
-          </mat-form-field>
+          <input id="password" matInput formControlName="password" placeholder="Enter your password"
+            [type]="hide ? 'password':'text'" />
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error *ngIf="handleError('password', 'required')">
+            Please provide a password.
+          </mat-error>
+          <mat-error *ngIf="handleError('password', 'minlength')">
+            Password must be at least 6 characters long.
+          </mat-error>
+        </mat-form-field>
 
-          <mat-form-field>
-            <input id="photoURL"
-                   matInput
-                   formControlName="photoURL"
-                   placeholder="Enter photo URL" />
-          </mat-form-field>
+        <mat-form-field>
+          <input id="confirmPassword" matInput formControlName="confirmPassword" placeholder="Confirm your password"
+            [type]="hide ? 'password':'text'" />
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error *ngIf="noMatch()" >
+            Password and repeat password don't match.
+          </mat-error>
+        </mat-form-field>
 
-          <mat-form-field>
-            <input id="phoneNumber"
-                   matInput
-                   formControlName="phoneNumber"
-                   placeholder="Enter your phone number" />
-          </mat-form-field>
+        <mat-form-field>
+          <input id="photoURL" matInput formControlName="photoURL" placeholder="Enter photo URL" pattern="http[s]{0,1}:\/\/.*"/>
+          <mat-error *ngIf="handleError('photoURL', 'required')">
+            Please provide a photo URL.
+        </mat-error>
+        <mat-error *ngIf="handleError('photoURL', 'pattern')">
+            Please provide a valid photo URL.
+        </mat-error>
+        </mat-form-field>
 
-          <button mat-button type="submit" 
-                  class="mat-raised-button mat-primary" 
-                  [disabled]="!registerForm.valid">Register</button>
-          <button mat-button routerLink="/login" class="divider">Login</button>
+        <mat-form-field>
+          <input id="phoneNumber" matInput formControlName="phoneNumber" placeholder="Enter your phone number" pattern="[0-9]{10,}"/>
+          <mat-error *ngIf="handleError('phoneNumber', 'required')">
+            Please provide a phone number.
+        </mat-error>
+        <mat-error *ngIf="handleError('phoneNumber', 'pattern')">
+            Phone number must be only digits and its length at least 10 digits.
+        </mat-error>
+        </mat-form-field>
+
+        <button mat-button type="submit" class="mat-raised-button mat-primary"
+          [disabled]="!registerForm.valid">Register</button>
+        <button mat-button routerLink="/login" class="divider">Login</button>
       </div>
     </form>
   </div>

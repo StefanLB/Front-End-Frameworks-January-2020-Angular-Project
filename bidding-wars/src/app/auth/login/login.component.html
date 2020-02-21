@@ -1,35 +1,39 @@
-<div class="medium-list" >
+<div class="medium-list">
   <div class="list-viewer-wrapper">
     <div class="list-header-title">Login</div>
 
-    <form  [formGroup]="loginForm" (ngSubmit)="loginUser()">
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
       <div class="form-container">
 
         <mat-form-field>
-            <input id="email"
-                   matInput
-                   formControlName="email"
-                   placeholder="Enter your email" />
-          </mat-form-field>
-
+          <input id="email" matInput formControlName="email" placeholder="Enter your email" />
+          <mat-error *ngIf="handleError('email', 'required')">
+            Please provide an email.
+          </mat-error>
+          <mat-error *ngIf="handleError('email', 'email')">
+            Please provide a valid email.
+          </mat-error>
+        </mat-form-field>
         <mat-form-field>
-            <input id="password"
-                   matInput
-                   formControlName="password"
-                   placeholder="Enter your password"
-                   [type]="hide ? 'password':'text'" />
-              <mat-icon matSuffix (click)="hide = !hide">
-                {{hide ? 'visibility' : 'visibility_off'}}
-              </mat-icon>
-          </mat-form-field>
+          <input id="password" matInput formControlName="password" placeholder="Enter your password"
+            [type]="hide ? 'password':'text'" />
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error *ngIf="handleError('password', 'required')">
+            Please provide a password.
+          </mat-error>
+          <mat-error *ngIf="handleError('password', 'minlength')">
+            Password must be at least 6 characters.
+          </mat-error>
+        </mat-form-field>
 
-          <button mat-button type="submit" 
-                  class="mat-raised-button mat-primary" 
-                  [disabled]="!loginForm.valid">Login</button>
-          <button mat-button routerLink="/register" class="divider">Register</button>
-          <button mat-button type="button" (click)="authService.googleAuth()" class="divider">
-            <i class="fab fa-google pr-4"></i>Log in with Google
-          </button>
+        <button mat-button type="submit" class="mat-raised-button mat-primary"
+          [disabled]="!loginForm.valid">Login</button>
+        <button mat-button type="button" routerLink="/register" class="divider">Register</button>
+        <button mat-button type="button" (click)="authService.googleAuth()" class="divider">
+          <i class="fab fa-google pr-4"></i>Log in with Google
+        </button>
       </div>
     </form>
   </div>

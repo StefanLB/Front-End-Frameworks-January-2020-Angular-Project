@@ -85,7 +85,7 @@ export class BidsService {
         this.router.navigate(['bids']);
       })
       .catch(error => {
-        console.log(error);
+        this.snackBar.open('An error occurred while attempting to delete!', 'Dismiss', { duration: 5000 });
       });
 
   }

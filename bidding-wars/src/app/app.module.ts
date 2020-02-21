@@ -13,18 +13,17 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material.module';
 import { BidsService } from './bids/bids.service';
-
+import { ContactComponent } from './contact/contact.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 //Firebase modules
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore'; // Only required for database features
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage'; // Only required for storage features
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';       // Only required for auth features
-import { ProfileComponent } from './user/profile/profile.component';
 
 
 @NgModule({

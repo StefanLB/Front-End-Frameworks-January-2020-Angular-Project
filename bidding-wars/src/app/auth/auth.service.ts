@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class AuthService {
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
-    public router: Router
+    public router: Router,
+    private snackBar: MatSnackBar
+
   ) { }
 
   login(email: string, password: string) {
@@ -24,8 +27,8 @@ export class AuthService {
           this.router.navigate(['/bids']);
         }
       }).catch(err => {
-        console.log(err);
-      })
+          this.snackBar.open('Incorrect Email or Password!', 'Dismiss', { duration: 5000 });
+      });
   }
 
   googleAuth() {
@@ -36,8 +39,8 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['/bids']);
-      }).catch((error) => {
-        console.log(error)
+      }).catch(err => {
+        this.snackBar.open('Error Logging in!', 'Dismiss', { duration: 5000 });
       })
   }
 
@@ -64,7 +67,7 @@ export class AuthService {
             this.router.navigate(['/bids']);
           });
       }).catch(err => {
-        console.log(err);
+        this.snackBar.open('An error occured during registration!', 'Dismiss', { duration: 5000 });
       });
   }
 

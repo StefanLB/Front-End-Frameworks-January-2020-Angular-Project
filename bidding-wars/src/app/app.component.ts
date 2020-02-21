@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener, OnInit } from '@angular/core';
+import { Component, ViewChild, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit{
   isExpanded = true;
   user: firebase.User;
 
@@ -22,13 +22,17 @@ export class AppComponent {
     .subscribe(user => {
       this.user = user;
     });
+  }
 
-    if (window.innerWidth < 768) {
-      this.sidenav.fixedTopGap = 55;
-      this.isExpanded = false;
-    } else {
-      this.sidenav.fixedTopGap = 55;
-      this.isExpanded = true;
+  ngAfterViewInit() {
+    if(this.sidenav){
+      if (window.innerWidth < 768) {
+        this.sidenav.fixedTopGap = 55;
+        this.isExpanded = false;
+      } else {
+        this.sidenav.fixedTopGap = 55;
+        this.isExpanded = true;
+      }
     }
   }
 

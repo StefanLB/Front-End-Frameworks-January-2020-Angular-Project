@@ -20,8 +20,6 @@ export class AuthGuard implements CanActivate {
       take(1),
       tap(allowed => {
         if (!allowed && route.data.isLogged) {
-          console.log(!allowed);
-          console.log(route.data.isLogged === true);
           this.router.navigate(['/login']);
         } else if (!allowed && !route.data.isLogged) {
           this.router.navigate(['/bids']);

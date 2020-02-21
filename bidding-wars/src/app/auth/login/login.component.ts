@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  public handleError = (controlName: string, errorName: string) => {
+    return this.loginForm.controls[controlName].hasError(errorName);
+  }
+
   loginUser(){
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
   }
