@@ -19,6 +19,7 @@ export class ViewBidComponent implements OnInit {
   currentHighestBid: string;
   imageUrl: string;
   canBid: boolean = false;
+  highestBid: number = 0;
 
   constructor(
     private auth: AuthService,
@@ -39,6 +40,7 @@ export class ViewBidComponent implements OnInit {
         }
         
         this.populateEditBidForm(data);
+        this.highestBid = +data.highestBid;
       });
   }
 
@@ -88,7 +90,7 @@ export class ViewBidComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
       endsOn: ['', [Validators.required]],
-      highestBid: [[null], [Validators.required, Validators.min(0)]],
+      highestBid: [[null], []],
       highestBidder: [''],
       highestBidderEmail: [''],
       imageUrl: ['', [Validators.required]],
@@ -100,6 +102,16 @@ export class ViewBidComponent implements OnInit {
 
   public handleError = (controlName: string, errorName: string) => {
     return this.editBidForm.controls[controlName].hasError(errorName);
+  }
+
+  lowerValue() {
+    if(+this.editBidForm.get('highestBid').value <= this.highestBid){
+      this.editBidForm.get('highestBid').setErrors({'min': true})
+    } else {
+      this.editBidForm.get('highestBid').setErrors(null);
+    }
+
+    return +this.editBidForm.get('highestBid').value <= this.highestBid;
   }
 
   goBack() {

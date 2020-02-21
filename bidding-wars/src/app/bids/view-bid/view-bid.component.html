@@ -25,12 +25,10 @@
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <input [readonly]=!canBid matInput type="number" placeholder="Your Bid" formControlName="highestBid"
-                            min={{currentHighestBid}}>
+                    <input [readonly]=!canBid matInput type="number" placeholder="Your Bid" formControlName="highestBid">
                         <span matPrefix>$&nbsp;</span>
-                        <mat-error *ngIf="handleError('highestBid', 'min')">
-                            Your bid should be higher than the current highest bid
-                            <strong>{{currentHighestBid}}</strong>.
+                        <mat-error *ngIf="lowerValue()">
+                            New bid should be higher than the current one (${{this.highestBid}}).
                         </mat-error>
                     </mat-form-field>
 

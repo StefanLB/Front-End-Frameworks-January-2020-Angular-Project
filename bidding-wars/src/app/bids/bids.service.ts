@@ -49,9 +49,9 @@ export class BidsService {
     return this.bidsRef;
   }
 
-  // Update Bid Object
-  updateBid(id, bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
-    this.bidRef.update({ //*** NOTE2: THE UPDATE BID SHOULD ALSO BE USED FOR WHEN SOMEONE BIDS ON AN OFFER ***/
+  // Place Bid
+  updateBid(id, bid: Bid) { 
+    this.bidRef.update({
       highestBid: bid.highestBid,
       highestBidder: bid.highestBidder,
       bidders: bid.bidders
@@ -63,8 +63,8 @@ export class BidsService {
   }
 
   // Update New Bid Object
-  updateNewBid(id, bid: Bid) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO EDIT BIDS IF NO ONE HAS YET MADE AN OFFER ***/
-    this.bidRef.update({ //*** NOTE2: THE UPDATE BID SHOULD ALSO BE USED FOR WHEN SOMEONE BIDS ON AN OFFER ***/
+  updateNewBid(id, bid: Bid) {
+    this.bidRef.update({
       name: bid.name,
       description: bid.description,
       endsOn: bid.endsOn,
@@ -77,7 +77,7 @@ export class BidsService {
   }
 
   // Delete New Bid Object
-  deleteBid(id: string) { //*** NOTE: YOU SHOULD ONLY BE ABLE TO DELETE BIDS IF NO ONE HAS YET MADE AN OFFER ***/
+  deleteBid(id: string) {
     this.bidRef = this.db.object('all-bids/' + id);
     this.bidRef.remove()
       .then(() => {

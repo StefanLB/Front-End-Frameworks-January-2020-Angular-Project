@@ -20,18 +20,28 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.updateProfileForm();
+
     this.auth.getUserState()
       .subscribe(user => {
         this.user = user;
+
+        this.editProfileForm.patchValue({
+          userName: this.user.displayName,
+          imageUrl: this.user.photoURL
+        })
       });
-    this.updateProfileForm();
   }
 
   updateProfileForm() {
     this.editProfileForm = this.fb.group({
-      userName: ['', [Validators.required]],
+      userName: ['', [Validators.required, Validators.minLength(6)]],
       imageUrl: ['', [Validators.required]]
     })
+  }
+
+  public handleError = (controlName: string, errorName: string) => {
+    return this.editProfileForm.controls[controlName].hasError(errorName);
   }
 
   logout() {
@@ -46,6 +56,5 @@ export class ProfileComponent implements OnInit {
       userName: this.editProfileForm.get('userName').value ? this.editProfileForm.get('userName').value : this.user.displayName,
       imageUrl: this.editProfileForm.get('imageUrl').value ? this.editProfileForm.get('imageUrl').value : this.user.photoURL
     });
-    this.router.navigate(['/']);
   }
 }

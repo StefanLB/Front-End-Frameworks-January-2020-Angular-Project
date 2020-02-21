@@ -5,7 +5,7 @@
     </div>
 
     <div class="inner-wrapper">
-        <form [formGroup]="bidsForm" (ngSubmit)="submitBidData()" #resetBidForm="ngForm" novalidate>
+        <form [formGroup]="bidsForm" novalidate>
             <mat-card>
                 <div class="controlers-wrapper">
                     <mat-form-field class="example-full-width">
@@ -48,7 +48,7 @@
 
                     <div class="full-wrapper button-wrapper">
                         <div class="button-wrapper">
-                            <button [disabled]="bidsForm.invalid" mat-flat-button color="warn">Submit</button>
+                            <button type="button" [disabled]="bidsForm.invalid" mat-flat-button color="warn" (click)="submitBidData()">Submit</button>
                             <button type="button" mat-flat-button (click)="resetForm()">Clear</button>
                         </div>
                     </div>

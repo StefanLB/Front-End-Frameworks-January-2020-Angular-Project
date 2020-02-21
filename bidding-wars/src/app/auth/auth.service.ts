@@ -27,7 +27,7 @@ export class AuthService {
           this.router.navigate(['/bids']);
         }
       }).catch(err => {
-          this.snackBar.open('Incorrect Email or Password!', 'Dismiss', { duration: 5000 });
+        this.snackBar.open('Incorrect Email or Password!', 'Dismiss', { duration: 5000 });
       });
   }
 
@@ -37,15 +37,18 @@ export class AuthService {
 
   authLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
-      .then((result) => {
+      .then(() => {
         this.router.navigate(['/bids']);
-      }).catch(err => {
+      }).catch(() => {
         this.snackBar.open('Error Logging in!', 'Dismiss', { duration: 5000 });
       })
   }
 
   logout() {
-    return this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut().then(() => {
+      this.snackBar.open('Successfully logged out!', 'Dismiss', { duration: 2000 });
+      this.router.navigate(['/']);
+    });
   }
 
   getUserState() {
@@ -66,8 +69,8 @@ export class AuthService {
           .then(() => {
             this.router.navigate(['/bids']);
           });
-      }).catch(err => {
-        this.snackBar.open('An error occured during registration!', 'Dismiss', { duration: 5000 });
+      }).catch(() => {
+        this.snackBar.open('Error during registration!', 'Dismiss', { duration: 5000 });
       });
   }
 
@@ -85,6 +88,12 @@ export class AuthService {
     this.afAuth.auth.currentUser.updateProfile({
       displayName: userData.userName,
       photoURL: userData.imageUrl
-    })
+    }).then(() => {
+      this.snackBar.open('Profile successfully updated!', 'Dismiss', { duration: 2000 });
+      this.router.navigate(['/bids']);
+    }
+    ).catch(() => {
+      this.snackBar.open('Error during profile update!', 'Dismiss', { duration: 5000 });
+    });
   }
 }

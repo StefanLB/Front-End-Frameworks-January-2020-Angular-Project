@@ -35,9 +35,9 @@ export class AddBidComponent implements OnInit {
     this.bidsForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
-      createdOn: [new Date().toISOString().substring(0, 10)],
+      createdOn: [''],
       endsOn: ['', [Validators.required]],
-      highestBid: [[null], [Validators.required, Validators.min(0)]],
+      highestBid: [0, [Validators.required, Validators.min(0)]],
       highestBidder: [''],
       highestBidderEmail: [''],
       imageUrl: ['', [Validators.required]],
@@ -51,7 +51,7 @@ export class AddBidComponent implements OnInit {
   }
 
   formatDate(e) {
-    var convertDate = new Date(e.target.value).toISOString().substring(0, 10);
+    var convertDate = new Date((e.target.value).setDate(e.target.value.getDate()+1)).toISOString().substring(0, 10);
     this.bidsForm.get('endsOn').setValue(convertDate, {
       onlyself: true
     })
@@ -66,10 +66,13 @@ export class AddBidComponent implements OnInit {
     this.bidsForm.get('sellerEmail').setValue(this.user.email);
     this.bidsForm.get('highestBidder').setValue(this.user.displayName);
     this.bidsForm.get('highestBidderEmail').setValue(this.user.email);
+    this.bidsForm.get('createdOn').setValue(new Date().toISOString().substring(0, 10));
+
 
     if (this.bidsForm.valid){
     this.bidApi.addBid(this.bidsForm.value);
     this.resetForm();
+    this.bidsForm.setErrors(null);
     }
   };
   

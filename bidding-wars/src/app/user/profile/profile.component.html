@@ -15,7 +15,13 @@
                 <div class="col-md-6">
                   <mat-label>Username: </mat-label>
                   <mat-form-field class="example-full-width">
-                    <input matInput formControlName="userName" value={{user?.displayName}}>
+                    <input matInput formControlName="userName">
+                    <mat-error *ngIf="handleError('userName', 'required')">
+                      Please provide a username.
+                    </mat-error>
+                    <mat-error *ngIf="handleError('userName', 'minlength')">
+                      Username must be at least 6 characters long.
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
@@ -29,7 +35,13 @@
                 <div class="col-md-6">
                   <mat-label>Photo URL: </mat-label>
                   <mat-form-field class="example-full-width">
-                    <input matInput formControlName="imageUrl" value={{user?.photoURL}}>
+                    <input matInput formControlName="imageUrl" pattern="http[s]{0,1}:\/\/.*">
+                    <mat-error *ngIf="handleError('imageUrl', 'required')">
+                      Please provide a photo URL.
+                    </mat-error>
+                    <mat-error *ngIf="handleError('imageUrl', 'pattern')">
+                      Please provide a valid photo URL.
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">

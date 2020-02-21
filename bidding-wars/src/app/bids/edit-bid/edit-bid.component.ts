@@ -70,7 +70,7 @@ export class EditBidComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(30)]],
       endsOn: ['', [Validators.required]],
-      highestBid: [[null], [Validators.required]],
+      highestBid: [[null], [Validators.required, Validators.min(0)]],
       highestBidder: [''],
       highestBidderEmail: [''],
       imageUrl: ['', [Validators.required]],
@@ -84,7 +84,7 @@ export class EditBidComponent implements OnInit {
   }
 
   formatDate(e) {
-    var convertDate = new Date(e.target.value).toISOString().substring(0, 10);
+    var convertDate = new Date((e.target.value).setDate(e.target.value.getDate()+1)).toISOString().substring(0, 10);
     this.editBidForm.get('endsOn').setValue(convertDate, {
       onlyself: true
     })
