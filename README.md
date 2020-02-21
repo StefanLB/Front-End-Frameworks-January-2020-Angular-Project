@@ -7,7 +7,8 @@
 SoftUni Front-end Frameworks Individual Project Assignment
 
 
-## Bidding Wars
+
+## [Bidding Wars](https://bidding-wars-6c4a8.firebaseapp.com/)
 
 ### Project Summary
 
@@ -46,7 +47,7 @@ When creating a bid, the seller provides details regarding the item *(such as na
 * [Angular Material](https://material.angular.io/) - UI/UX component library
 * [Node.js](https://nodejs.org/en/) - JavaScript runtime environment
 * [Npm](https://www.npmjs.com/get-npm) - Package manager
-* [Firebase](https://firebase.google.com/) - Cloud-hosted NoSQL database/Backend
+* [Firebase](https://firebase.google.com/) - Cloud-hosted NoSQL database/Server/Backend
 * [Visual Studio Code](https://code.visualstudio.com/) - IDE
 
 ---
@@ -71,6 +72,42 @@ Once all dependencies are installed, build and launch the application through th
 ```
 ng s --open
 ```
+
+---
+
+### Cloud Deployment
+
+Deployment to Firebase cloud hosting requires Firebase CLI to be installed on your machine.
+For a step-by-step guide, you may refer to the following link: [Deploy Angular 8/9 App to Firebase](https://www.positronx.io/deploy-angular-8-app-to-firebase/). All credits for the linked tutorial go to its author Digamber Rawat.
+
+**Summary**:
+
+Install Firebase CLI.
+```
+npm install -g firebase-tools
+```
+
+Log into Firebase.
+```
+firebase login
+```
+
+Initialize a Firebase project.
+```
+firebase init
+```
+
+Build the project for production, use AOT *(Ahead of Time)* compilation.
+```
+ng build --prod --aot
+```
+
+Deploy the App to Firebase.
+```
+firebase deploy
+```
+
+This App is currently hosted on https://bidding-wars-6c4a8.firebaseapp.com/
 
 ---
 
