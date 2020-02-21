@@ -36,15 +36,26 @@ export class CreatedBidsComponent {
     private bidApi: BidsService,
     private dialog: MatDialog
   ) {
-      this.auth.getUserState().subscribe(user => {
-        const userEmail = user.email;
-        if (userEmail !== null && userEmail !== undefined) {
-          this.bidApi.getBidsList()
+    this.auth.getUserState().subscribe(user => {
+      const userEmail = user.email;
+      const currentDate = new Date();
+
+      if (userEmail) {
+        this.bidApi.getBidsList()
           .snapshotChanges().subscribe(bids => {
             bids.forEach(item => {
               let a = item.payload.toJSON();
               if ((a as Bid).sellerEmail == userEmail) {
                 a['$key'] = item.key;
+
+                if (currentDate.getTime() <= Date.parse(a['endsOn']) &&  // bid has not expired
+                    Object.keys(a['bidders']).length <= 1                // no bids have been placed yet
+                ) {
+                  a['canModify'] = true;
+                } else {
+                  a['canModify'] = false;
+                }
+                
                 this.BidData.push(a as Bid)
               }
             })
@@ -55,13 +66,13 @@ export class CreatedBidsComponent {
               this.dataSource.sort = this.sort;
             }, 0);
           });
-        }
-        this.hasLoaded = true; 
-      });
+      }
+      this.hasLoaded = true;
+    });
   }
 
   get hasData() {
-    if (this.BidData.length > 0 ) {
+    if (this.BidData.length > 0) {
       return true;
     }
     return false;

@@ -36,9 +36,23 @@ export class EditBidComponent implements OnInit {
     private dialog: MatDialog
   ) {
     var id = this.actRoute.snapshot.paramMap.get('id');
-    this.bidApi.getBid(id).valueChanges().subscribe(data => {
-      this.populateEditBidForm(data);
-    })
+
+    this.auth.getUserState().subscribe(user => {
+      const userEmail = user.email;
+      const currentDate = new Date();
+
+      this.bidApi.getBid(id).valueChanges().subscribe(data => {
+
+        if (data['sellerEmail'] != userEmail ||                   // user is not the seller
+          currentDate.getTime() > Date.parse(data['endsOn']) ||   // bid has expired
+          Object.keys(data['bidders']).length > 1                 // bids have been placed
+        ) {
+          this.router.navigate(['/bids']);
+        }
+
+        this.populateEditBidForm(data);
+      });
+    });
   }
 
   populateEditBidForm(data) {

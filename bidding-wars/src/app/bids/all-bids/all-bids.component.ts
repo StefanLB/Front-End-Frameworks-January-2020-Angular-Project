@@ -4,6 +4,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { BidsService } from '../bids.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-all-bids',
@@ -15,8 +16,9 @@ export class AllBidsComponent {
 
   dataSource: MatTableDataSource<Bid>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   BidData: any = [];
+  user: firebase.User;
 
   displayedColumns: any[] = [
     'name',
@@ -29,24 +31,40 @@ export class AllBidsComponent {
   ];
 
   constructor(
+    private auth: AuthService,
     private bidApi: BidsService,
     private dialog: MatDialog
-    ) {
-    this.bidApi.getBidsList()
-      .snapshotChanges().subscribe(bids => {
-        bids.forEach(item => {
-          let a = item.payload.toJSON();
-          a['$key'] = item.key;
-          this.BidData.push(a as Bid)
-        })
-        /* Data table */
-        this.dataSource = new MatTableDataSource(this.BidData);
-        /* Pagination */
-        setTimeout(() => {
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }, 0);
-      })
+  ) {
+    this.auth.getUserState().subscribe(user => {
+      const userEmail = user.email;
+      const currentDate = new Date();
+
+      this.bidApi.getBidsList()
+        .snapshotChanges().subscribe(bids => {
+          bids.forEach(item => {
+            let a = item.payload.toJSON();
+            a['$key'] = item.key;
+
+            if (a['sellerEmail'] == userEmail &&                     // user is the seller
+                currentDate.getTime() <= Date.parse(a['endsOn']) &&  // bid has not expired
+                Object.keys(a['bidders']).length <= 1                // no bids have been placed yet
+            ) {
+              a['canModify'] = true;
+            } else {
+              a['canModify'] = false;
+            }
+
+            this.BidData.push(a as Bid)
+          });
+
+          this.dataSource = new MatTableDataSource(this.BidData);
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }, 0);
+        });
+
+    });
   }
 
   get isReady() {

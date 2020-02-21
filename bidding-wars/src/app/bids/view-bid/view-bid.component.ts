@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BidDialogComponent } from '../bid-dialog/bid-dialog.component';
+import { Bid } from '../bid';
 
 @Component({
   selector: 'app-view-bid',
@@ -17,6 +18,7 @@ export class ViewBidComponent implements OnInit {
   editBidForm: FormGroup;
   currentHighestBid: string;
   imageUrl: string;
+  canBid: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -28,8 +30,16 @@ export class ViewBidComponent implements OnInit {
   ) {
     var id = this.actRoute.snapshot.paramMap.get('id');
     this.bidApi.getBid(id).valueChanges().subscribe(data => {
-      this.populateEditBidForm(data);
-    })
+      const currentDate = new Date();
+
+        if (currentDate.getTime() <= Date.parse(data['endsOn'])) {
+          this.canBid = true;
+        } else {
+          this.canBid = false;
+        }
+        
+        this.populateEditBidForm(data);
+      });
   }
 
   ngOnInit() {
@@ -66,7 +76,8 @@ export class ViewBidComponent implements OnInit {
       endsOn: data.endsOn,
       highestBid: +data.highestBid,
       imageUrl: data.imageUrl,
-      bidders: data.bidders
+      bidders: data.bidders,
+      highestBidder: data.highestBidder
     });
     this.currentHighestBid = data.highestBid;
     this.imageUrl = data.imageUrl;

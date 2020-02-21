@@ -21,7 +21,11 @@
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <input matInput type="number" placeholder="Your Bid" formControlName="highestBid"
+                        <input readonly matInput placeholder="Highest Bidder" formControlName="highestBidder">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input [readonly]=!canBid matInput type="number" placeholder="Your Bid" formControlName="highestBid"
                             min={{currentHighestBid}}>
                         <span matPrefix>$&nbsp;</span>
                         <mat-error *ngIf="handleError('highestBid', 'min')">
@@ -32,7 +36,7 @@
 
                     <div class="full-wrapper button-wrapper">
                         <div class="button-wrapper">
-                            <button [disabled]="editBidForm.invalid" mat-flat-button color="warn">Place Bid</button>
+                            <button [disabled]="editBidForm.invalid || !canBid" mat-flat-button color="warn">Place Bid</button>
                             <button mat-flat-button color="war" type="button" (click)="goBack()">Go Back</button>
                         </div>
                     </div>
